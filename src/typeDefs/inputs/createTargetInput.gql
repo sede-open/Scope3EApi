@@ -1,0 +1,10 @@
+input CreateTargetInput {
+  companyId: UUID!
+  strategy: TargetStrategyType!
+  includeCarbonOffset: Boolean!
+  scope1And2Year: Int!
+  scope3Year: Int
+  scope1And2Reduction: Float!
+  scope3Reduction: Float
+  targetType: TargetType!
+}

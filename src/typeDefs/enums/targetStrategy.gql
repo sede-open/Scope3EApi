@@ -1,0 +1,8 @@
+enum TargetStrategyType {
+  "Passive emissions reduction strategy"
+  PASSIVE
+  "Moderate emissions reduction strategy"
+  MODERATE
+  "Aggressive emissions reduction strategy"
+  AGGRESSIVE
+}

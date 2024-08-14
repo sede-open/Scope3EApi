@@ -1,0 +1,29 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": 2,
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "no-console": [
+      "warn",
+      { "allow": ["clear", "info", "error", "dir", "trace", "warn"] }
+    ],
+    // this is turned off because we need to let typescript plugin to take over
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "object-shorthand": ["error", "always"],
+    "no-return-await": "error"
+  }
+}

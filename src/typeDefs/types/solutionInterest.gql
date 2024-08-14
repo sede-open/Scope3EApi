@@ -1,0 +1,7 @@
+type SolutionInterest {
+  id: ID!
+  name: String!
+  systemName: SolutionInterestsSystemName!
+  createdAt: Date!
+  updatedAt: Date!
+}

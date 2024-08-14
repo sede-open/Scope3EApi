@@ -1,0 +1,7 @@
+type NetworkSummary {
+  companyId: UUID!
+  numSuppliers: Int!
+  numCustomers: Int!
+  numPendingInvitations: Int!
+  pendingInvitations: [Invitation!]!
+}

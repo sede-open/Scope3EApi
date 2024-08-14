@@ -1,0 +1,26 @@
+type Me {
+  id: UUID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  expertiseDomain: ExpertiseDomain
+  authProvider: AuthProvider!
+  roles: [Role!]!
+  company: Company
+  status: UserStatus!
+  canViewUsersAdminDashboard: Boolean!
+  canViewCompaniesAdminDashboard: Boolean!
+  canViewSupplyDashboard: Boolean!
+  canEditSupplyDashboard: Boolean!
+  canViewCompanyRelationships: Boolean!
+  canEditCompanyRelationships: Boolean!
+  canViewEmissionAllocations: Boolean!
+  canEditEmissionAllocations: Boolean!
+  canEditCompanySectors: Boolean!
+  canInviteNewCompanyMembers: Boolean!
+  canEditCompanyMembers: Boolean!
+  canRemoveCompanyMembers: Boolean!
+  canSubmitDataPrivacyInfo: Boolean!
+  preferences: Preferences
+  launchDarklyHash: String!
+}

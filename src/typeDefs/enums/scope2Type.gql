@@ -1,0 +1,6 @@
+enum Scope2Type {
+  "Market-based scope 2 emissions"
+  MARKET
+  "Location-based scope 2 emissions"
+  LOCATION
+}

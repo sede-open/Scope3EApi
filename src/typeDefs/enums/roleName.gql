@@ -1,0 +1,10 @@
+enum RoleName {
+  "Internal user"
+  ADMIN
+  "Account manager"
+  ACCOUNT_MANAGER
+  "External user with editor rights"
+  SUPPLIER_EDITOR
+  "External user with viewer rights"
+  SUPPLIER_VIEWER
+}

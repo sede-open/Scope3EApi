@@ -1,0 +1,6 @@
+enum CompanyRelationshipType {
+  "A company's customer"
+  CUSTOMER
+  "A company's supplier"
+  SUPPLIER
+}

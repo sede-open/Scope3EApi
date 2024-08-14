@@ -1,0 +1,5 @@
+type CorporateCarbonIntensityComparison {
+  year: Int!
+  sectorIntensity: CorporateCarbonIntensityInfo!
+  companyIntensity: CorporateCarbonIntensityInfo!
+}

@@ -1,0 +1,4 @@
+type DnBAuthTokenResponse {
+  access_token: String!
+  expiresIn: Int!
+}

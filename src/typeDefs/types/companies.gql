@@ -1,0 +1,4 @@
+type Companies {
+  data: [Company!]!
+  total: Int!
+}

@@ -1,0 +1,13 @@
+type User {
+  id: UUID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  authProvider: AuthProvider!
+  status: UserStatus!
+  roles: [Role!]
+  expertiseDomain: ExpertiseDomain
+  company: Company
+  preferences: Preferences
+  hubspotId: String
+}

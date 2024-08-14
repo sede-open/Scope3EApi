@@ -1,0 +1,2 @@
+"Checks that the current logged in user has at least one of the specified roles"
+directive @hasRole(roles: [String!]!) on FIELD_DEFINITION

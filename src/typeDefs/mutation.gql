@@ -1,0 +1,106 @@
+type Mutation {
+  createUser(input: CreateUserInput!): User! @hasRole(roles: ["ADMIN"])
+  editUser(input: EditUserInput!): User! @hasRole(roles: ["ADMIN"])
+  deleteUser(input: DeleteUserInput!): String!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN"])
+  createCorporateEmission(
+    input: CreateCorporateEmissionInput!
+  ): CorporateEmission
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  deleteCorporateEmission(input: DeleteCorporateEmissionInput!): String
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCorporateEmission(
+    input: UpdateCorporateEmissionInput!
+  ): CorporateEmission
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  createTarget(input: CreateTargetInput!): AbsoluteTarget
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateTarget(input: UpdateTargetInput!): AbsoluteTarget
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  saveTargets(input: SaveTargetsInput!): SimpleSuccess!
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  enquiryEmail(input: EnquiryEmailInput!): String!
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  inviteCompanyEmail(input: InviteCompanyEmailInput!): String
+    @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  editPreferences(input: EditPreferencesInput!): Preferences
+  createCompanyRelationship(
+    input: CreateCompanyRelationshipInput!
+  ): CompanyRelationship!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  inviteAndConnectToCompany(
+    input: InviteAndConnectToCompanyInput!
+  ): CompanyRelationship!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  updateCompanyRelationship(
+    input: UpdateCompanyRelationshipInput!
+  ): CompanyRelationship!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  dataShareRequest(targetCompanyId: UUID!): DataShareRequest!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  createEmissionAllocation(
+    input: CreateEmissionAllocationInput!
+  ): EmissionAllocation!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateEmissionAllocation(
+    input: UpdateEmissionAllocationInput!
+  ): EmissionAllocation!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  deleteEmissionAllocation(input: DeleteEmissionAllocationInput!): String!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanySectors(input: UpdateCompanySectorsInput!): [CompanySector!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateUserSolutionInterests(
+    input: UpdateUserSolutionInterestsInput!
+  ): [UserSolutionInterest!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  updateCompanyStatus(input: UpdateCompanyStatusInput!): Company!
+    @hasRole(roles: ["ADMIN"])
+  resendUserInviteToJoinEmail(
+    input: ResendUserInviteToJoinEmailInput!
+  ): String! @hasRole(roles: ["ADMIN"])
+  acceptCompanyInvite(input: AcceptCompanyInviteInput!): String!
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  declineCompanyInvite(input: DeclineCompanyInviteInput!): String!
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  vetoCompany(input: VetoCompanyInput!): Company! @hasRole(roles: ["ADMIN"])
+  approveCompany(input: ApproveCompanyInput!): Company!
+    @hasRole(roles: ["ADMIN"])
+  activateUserAndCompany: User!
+  createCompanyUser(input: CreateCompanyUserInput!): User!
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  editCompanyUser(input: EditCompanyUserInput!): User!
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  updateMe(input: UpdateMeInput!): Me!
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  resendAkamaiInvite(input: ResentAkamaiInviteInput!): String!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN"])
+  createCompanyPrivacy(input: CompanyPrivacyInput!): CompanyPrivacy
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanyPrivacy(input: CompanyPrivacyInput!): CompanyPrivacy
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanyRelationshipRecommendationStatus(
+    id: UUID!
+    status: CompanyRelationshipRecommendationStatus!
+  ): String!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+}

@@ -1,0 +1,17 @@
+type CompanyProfile {
+  id: UUID!
+  name: String!
+  duns: String
+  dnbRegion: String
+  dnbCountryIso: String
+  estimatedNumberOfEmployees: Int
+  estimatedUsdOfRevenue: Float
+  absoluteTargetType: TargetPrivacyType
+  sectors: [String!]!
+  activeRelationship: CompanyRelationshipType
+  invitationPending: Boolean!
+  isPublic: Boolean!
+  isActive: Boolean!
+  dataShareRequestSent: Boolean!
+  companyPrivacy: CompanyPrivacy
+}

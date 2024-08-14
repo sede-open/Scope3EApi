@@ -1,0 +1,17 @@
+input SaveTargetsTargetInstance {
+  strategy: TargetStrategyType!
+  includeCarbonOffset: Boolean!
+  scope1And2Year: Int!
+  scope3Year: Int
+  scope1And2Reduction: Float!
+  scope3Reduction: Float
+  targetType: TargetType!
+  intensityMetric: CarbonIntensityMetricType
+  scope1And2PrivacyType: TargetPrivacyType!
+  scope3PrivacyType: TargetPrivacyType
+}
+
+input SaveTargetsInput {
+  companyId: UUID!
+  toSave: [SaveTargetsTargetInstance!]!
+}

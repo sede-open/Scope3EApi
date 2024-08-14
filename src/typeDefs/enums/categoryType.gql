@@ -1,0 +1,3 @@
+enum CategoryType {
+  SCOPE_3
+}

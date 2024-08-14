@@ -1,0 +1,5 @@
+enum EmissionAllocationMethod {
+  PHYSICAL
+  ECONOMICAL
+  OTHER
+}

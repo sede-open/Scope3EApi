@@ -1,0 +1,16 @@
+input Inviter {
+  company: SafeString!
+  email: Email!
+  name: SafeString!
+}
+
+input Invitee {
+  company: SafeString!
+  email: Email!
+  name: SafeString!
+}
+
+input InviteCompanyEmailInput {
+  inviter: Inviter!
+  invitee: Invitee!
+}

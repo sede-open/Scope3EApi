@@ -1,0 +1,6 @@
+enum UserStatus {
+  "Active user"
+  ACTIVE
+  "Invited user whose company has not been approved. No access to the app"
+  PENDING
+}

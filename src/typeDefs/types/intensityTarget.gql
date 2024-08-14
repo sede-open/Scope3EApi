@@ -1,0 +1,13 @@
+type IntensityTarget {
+  scope1And2Year: Int!
+  scope1And2Reduction: Float!
+  scope3Year: Int
+  scope3Reduction: Float
+  strategy: TargetStrategyType!
+  includeCarbonOffset: Boolean!
+  intensityMetric: CarbonIntensityMetricType!
+  intensityValue: Float!
+  scope1And2PrivacyType: TargetPrivacyType
+  scope3PrivacyType: TargetPrivacyType
+  companyId: String!
+}

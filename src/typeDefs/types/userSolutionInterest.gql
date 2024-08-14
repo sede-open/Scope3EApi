@@ -1,0 +1,6 @@
+type UserSolutionInterest {
+  id: UUID!
+  solutionInterest: SolutionInterest!
+  createdAt: Date!
+  updatedAt: Date!
+}

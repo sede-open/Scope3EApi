@@ -1,0 +1,4 @@
+enum EmissionPrivacyStatus {
+  SHARED
+  NOT_SHARED
+}

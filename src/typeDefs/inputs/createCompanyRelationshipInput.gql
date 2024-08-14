@@ -1,0 +1,6 @@
+input CreateCompanyRelationshipInput {
+  inviteType: CompanyRelationshipType!
+  customerId: UUID!
+  supplierId: UUID!
+  note: SafeString
+}

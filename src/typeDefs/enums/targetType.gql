@@ -1,0 +1,6 @@
+enum TargetType {
+  "Absolute Ambition Target Type"
+  ABSOLUTE
+  "Intensity Ambition Target Type"
+  INTENSITY
+}

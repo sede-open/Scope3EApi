@@ -1,0 +1,4 @@
+type Targets {
+  absolute: [AbsoluteTarget!]!
+  intensity: [IntensityTarget!]!
+}

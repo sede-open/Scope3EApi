@@ -1,0 +1,183 @@
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: app-api-estimated-carbon-intensities
+  labels:
+    app: app-api-estimated-carbon-intensities
+    name: app-api-estimated-carbon-intensities
+spec:
+  schedule: '0 9 * * *'
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 3600
+      template:
+        spec:
+          containers:
+            - env:
+                - name: AKAMAI_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: AKAMAI_CLIENT_ID
+                      name: app-ui-secret
+                - name: DBUSER
+                  valueFrom:
+                    secretKeyRef:
+                      key: DBUSER
+                      name: app-api-secret
+                - name: DBPASS
+                  valueFrom:
+                    secretKeyRef:
+                      key: DBPASS
+                      name: app-api-secret
+                - name: DBHOST
+                  valueFrom:
+                    secretKeyRef:
+                      key: DBHOST
+                      name: app-api-secret
+                - name: DBNAME
+                  valueFrom:
+                    secretKeyRef:
+                      key: DBNAME
+                      name: app-api-secret
+                - name: MULESOFT_API_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: MULESOFT_API_CLIENT_ID
+                      name: app-api-secret
+                - name: MULESOFT_API_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: MULESOFT_API_CLIENT_SECRET
+                      name: app-api-secret
+                - name: REDIS_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      key: REDIS_HOST
+                      name: app-api-secret
+                - name: REDIS_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: REDIS_PASSWORD
+                      name: app-api-secret
+                - name: REDIS_PORT
+                  value: '{{ .Values.REDIS_PORT }}'
+                - name: AZURE_STORAGE_CONNECTION_STRING
+                  valueFrom:
+                    secretKeyRef:
+                      key: AZURE_STORAGE_CONNECTION_STRING
+                      name: app-api-secret
+                - name: DNB_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: DNB_API_KEY
+                      name: app-api-secret
+                - name: DNB_API_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: DNB_API_SECRET
+                      name: app-api-secret
+                - name: INVITE_JWT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: INVITE_JWT_SECRET
+                      name: app-api-secret
+                - name: TRIBE_JWT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: TRIBE_JWT_SECRET
+                      name: app-api-secret
+                - name: NEW_RELIC_LICENSE_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: NEW_RELIC_LICENSE_KEY
+                      name: app-api-secret
+                - name: AKAMAI_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: AKAMAI_SECRET
+                      name: app-ui-secret
+                - name: AUTH_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: AUTH_CLIENT_ID
+                      name: app-ui-secret
+                - name: AUTH_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: AUTH_CLIENT_SECRET
+                      name: app-ui-secret
+                - name: HUBSPOT_EMAIL_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: HUBSPOT_EMAIL_TOKEN
+                      name: app-api-secret
+                - name: HUBSPOT_CRM_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: HUBSPOT_CRM_TOKEN
+                      name: app-api-secret
+                - name: SLACK_BOT_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      key: SLACK_BOT_TOKEN
+                      name: app-api-secret
+                - name: S_AND_P_BASIC_AUTH_TOKEN_BASE_64_ENCODED
+                  valueFrom:
+                    secretKeyRef:
+                      key: S_AND_P_BASIC_AUTH_TOKEN_BASE_64_ENCODED
+                      name: app-api-secret
+                - name: XYZ_ALERTS_SLACK_CHANNEL_ID
+                  value: '{{ .Values.XYZ_ALERTS_SLACK_CHANNEL_ID }}'
+                - name: LAUNCH_DARKLY_SERVER_SDK_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: LAUNCH_DARKLY_SERVER_SDK_KEY
+                      name: app-api-secret
+                - name: ENVIRONMENT
+                  value: '{{ .Values.environment }}'
+                - name: AKAMAI_BASE_URL
+                  value: '{{ .Values.AKAMAI_BASE_URL }}'
+                - name: AKAMAI_REGISTRATION_REDIRECT
+                  value: '{{ .Values.AKAMAI_REGISTRATION_REDIRECT }}'
+                - name: MULESOFT_API_URL
+                  value: '{{ .Values.MULESOFT_API_URL }}'
+                - name: SENTRY_DSN
+                  value: '{{ .Values.SENTRY_DSN }}'
+                - name: XYZ_EMAIL_ADDRESS
+                  value: '{{ .Values.XYZ_EMAIL_ADDRESS }}'
+                - name: WEB_APP_BASE_URL
+                  value: '{{ .Values.WEB_APP_BASE_URL }}'
+                - name: DNB_AUTH_URL
+                  value: '{{ .Values.DNB_AUTH_URL }}'
+                - name: DNB_TYPEAHEAD_URL
+                  value: '{{ .Values.DNB_TYPEAHEAD_URL }}'
+                - name: DNB_BY_DUNS_URL
+                  value: '{{ .Values.DNB_BY_DUNS_URL }}'
+                - name: JWT_ISSUER
+                  value: '{{ .Values.JWT_ISSUER }}'
+                - name: LOG_LEVEL
+                  value: '{{ .Values.LOG_LEVEL }}'
+                - name: AUTH_TOKEN_API
+                  value: '{{ .Values.AUTH_TOKEN_API }}'
+              name: {{ .Chart.Name }}
+              image: {{ .Values.image }}
+              command: ["/bin/sh"]
+              args: ["-c", "cron job suspended"]
+              ports:
+                - name: {{ .Values.portName }}
+                  containerPort: {{ .Values.port }}
+              resources:
+                limits:
+                  cpu: {{ .Values.cpuLimit }}
+                  memory: {{ .Values.memoryLimit }}
+                requests:
+                  cpu: {{ .Values.cpuRequest }}
+                  memory: {{ .Values.memoryRequest }}
+              securityContext:
+                allowPrivilegeEscalation: false
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+          securityContext:
+            runAsUser: {{ .Values.appUser }}

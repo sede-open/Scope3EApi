@@ -1,0 +1,6 @@
+enum ReductionRankType {
+  "Selected company rank"
+  SELECTED
+  "Other company rank"
+  OTHER
+}

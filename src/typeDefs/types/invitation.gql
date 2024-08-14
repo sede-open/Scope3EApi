@@ -1,0 +1,10 @@
+type Invitation {
+  id: UUID!
+  inviteType: CompanyRelationshipType!
+  status: InviteStatus!
+  customerName: String!
+  supplierName: String!
+  note: String
+  createdAt: Date!
+  updatedAt: Date
+}

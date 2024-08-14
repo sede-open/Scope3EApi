@@ -1,0 +1,20 @@
+type EmissionAllocation {
+  id: UUID!
+  year: Int!
+  status: EmissionAllocationStatus!
+  type: EmissionAllocationType!
+  customerId: UUID!
+  customer: Company!
+  customerEmissionId: UUID
+  emissions: Float
+  allocationMethod: EmissionAllocationMethod
+  supplierId: UUID
+  supplier: Company
+  customerApprover: User
+  supplierApprover: User
+  categoryId: UUID
+  category: Category
+  addedToCustomerScopeTotal: Boolean
+  note: String
+  createdAt: Date!
+}

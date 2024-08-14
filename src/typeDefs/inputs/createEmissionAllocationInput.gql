@@ -1,0 +1,10 @@
+input CreateEmissionAllocationInput {
+  year: Int!
+  customerId: UUID!
+  supplierId: UUID!
+  emissions: Float
+  allocationMethod: EmissionAllocationMethod
+  supplierEmissionId: UUID
+  customerEmissionId: UUID
+  note: SafeString
+}

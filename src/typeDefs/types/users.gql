@@ -1,0 +1,4 @@
+type Users {
+  data: [User!]!
+  count: Int!
+}

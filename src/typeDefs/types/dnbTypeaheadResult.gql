@@ -1,0 +1,10 @@
+type DnBTypeaheadResult {
+  duns: String!
+  primaryName: String!
+  isGlobalUltimate: Boolean!
+  globalUltimateDuns: String
+  globalUltimatePrimaryName: String
+  addressLine1: String
+  addressCountryIsoAlpha2Code: String
+  addressRegionName: String
+}

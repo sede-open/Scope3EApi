@@ -1,0 +1,5 @@
+input UpdateCompanyRelationshipInput {
+  id: UUID!
+  status: InviteStatus
+  note: SafeString
+}

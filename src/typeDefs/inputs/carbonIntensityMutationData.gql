@@ -1,0 +1,4 @@
+input CreateCarbonIntensityData {
+  type: CarbonIntensityMetricType!
+  value: Float!
+}

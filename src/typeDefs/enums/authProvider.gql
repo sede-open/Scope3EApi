@@ -1,0 +1,8 @@
+enum AuthProvider {
+  "For internal users only"
+  PORT
+  "For external users only"
+  AKAMAI
+  "For invites for minimal querying and updates"
+  INVITE
+}

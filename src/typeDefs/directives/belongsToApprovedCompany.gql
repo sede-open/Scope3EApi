@@ -1,0 +1,2 @@
+"Checks if the company user belongs to has been vetted and approved"
+directive @belongsToApprovedCompany on FIELD_DEFINITION

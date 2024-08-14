@@ -1,0 +1,4 @@
+directive @validateCompanyAccess(
+  inputFieldsToValidate: [String!]!
+  permitAdmins: Boolean!
+) on FIELD_DEFINITION

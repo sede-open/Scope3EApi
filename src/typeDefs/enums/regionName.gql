@@ -1,0 +1,12 @@
+enum RegionName {
+  "Asia regions"
+  ASIA
+  "Europe regions"
+  EUROPE
+  "Africa regions"
+  AFRICA
+  "Oceania regions"
+  OCEANIA
+  "Americas regions"
+  AMERICAS
+}

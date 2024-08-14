@@ -1,0 +1,7 @@
+enum EmissionAllocationStatus {
+  AWAITING_APPROVAL
+  APPROVED
+  REJECTED
+  REQUESTED
+  REQUEST_DISMISSED
+}

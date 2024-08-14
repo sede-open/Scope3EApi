@@ -1,0 +1,4 @@
+input DeclineCompanyInviteInput {
+  companyId: UUID!
+  reason: SafeString!
+}

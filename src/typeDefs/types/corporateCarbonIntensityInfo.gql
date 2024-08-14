@@ -1,0 +1,5 @@
+type CorporateCarbonIntensityInfo {
+  scope1: Float
+  scope2: Float
+  scope3: Float
+}

@@ -1,0 +1,14 @@
+type CompanyRelationship {
+  id: UUID!
+  inviteType: CompanyRelationshipType!
+  status: InviteStatus!
+  customer: Company!
+  supplier: Company!
+  customerApprover: User
+  supplierApprover: User
+  note: String
+  createdAt: Date!
+  updatedAt: Date
+  ambitionPrivacyStatus: AmbitionPrivacyStatus
+  emissionPrivacyStatus: EmissionPrivacyStatus
+}

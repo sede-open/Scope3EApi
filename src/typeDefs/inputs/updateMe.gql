@@ -1,0 +1,5 @@
+input UpdateMeInput {
+  firstName: UserName
+  lastName: UserName
+  expertiseDomain: ExpertiseDomain
+}

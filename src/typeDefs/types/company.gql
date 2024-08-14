@@ -1,0 +1,26 @@
+type Company {
+  id: UUID!
+  name: String!
+  status: CompanyStatus!
+  duns: String
+  dnbRegion: String
+  dnbCountry: String
+  dnbCountryIso: String
+  dnbPostalCode: String
+  dnbAddressLineOne: String
+  dnbAddressLineTwo: String
+  location: String
+  businessSection: String
+    @deprecated(reason: "Use `CompanySectors` where sectorType is PRIMARY.")
+  subSector: String
+    @deprecated(reason: "Use `CompanySectors` where sectorType is SECONDARY.")
+  companySectors: [CompanySector!]
+  reviewedByUser: User
+  createdByUser: User
+  updatedByUser: User
+  updatedAt: Date
+  createdAt: Date
+  reviewedAt: Date
+  hubspotId: String
+  users: [User!]! @hasRole(roles: ["ADMIN"])
+}

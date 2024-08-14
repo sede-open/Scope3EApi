@@ -1,0 +1,8 @@
+input CorporateEmissionAccessInput {
+  scope1And2: Boolean!
+  scope3: Boolean!
+  carbonOffsets: Boolean!
+  carbonIntensity: Boolean!
+  publicLink: SafeString
+}
+

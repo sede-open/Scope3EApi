@@ -1,0 +1,9 @@
+enum ContactEmailSource {
+  EVENTS
+  EMAIL
+  SOCIAL_MEDIA
+  SEARCH_ENGINE
+  RECOMMENDED
+  WORD_OF_MOUTH
+  OTHER
+}

@@ -1,0 +1,19 @@
+type CorporateEmissionWithCarbonIntensityInfo {
+  id: UUID!
+  company: Company!
+  type: CorporateEmissionType!
+  year: Int!
+  scope1: Float!
+  scope2: Float!
+  scope3: Float
+  scope2Type: Scope2Type!
+  offset: Float
+  examplePercentage: Float
+  headCount: Int
+  carbonIntensities: [CarbonIntensity!]!
+  verificationFile: File
+  createdByUser: User!
+  updatedByUser: User
+  createdAt: Date!
+  updatedAt: Date!
+}

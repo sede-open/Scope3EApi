@@ -1,0 +1,18 @@
+enum SolutionInterestsSystemName {
+  "Behaviour change"
+  BEHAVIOUR_CHANGE
+  "Fuel switch"
+  FUEL_SWITCH
+  "Material and process efficiency"
+  MATERIAL_AND_PROCESS_EFFICIENCY
+  "Renewable power"
+  RENEWABLE_POWER
+  "Renewable heat"
+  RENEWABLE_HEAT
+  "Recycling"
+  RECYCLING
+  "Carbon capture"
+  CARBON_CAPTURE
+  "Nature based solutions"
+  NATURE_BASED_SOLUTIONS
+}

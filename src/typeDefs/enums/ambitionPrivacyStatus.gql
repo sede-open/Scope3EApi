@@ -1,0 +1,5 @@
+enum AmbitionPrivacyStatus {
+  NOT_SHARED
+  SHARED
+  SHARED_SBTI
+}

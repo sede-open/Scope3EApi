@@ -1,0 +1,12 @@
+type CarbonIntensity {
+  id: UUID!
+  company: Company!
+  year: Int!
+  intensityMetric: CarbonIntensityMetricType!
+  intensityValue: Float!
+  type: CarbonIntensityType!
+  createdByUser: User!
+  updatedByUser: User
+  createdAt: Date!
+  updatedAt: Date
+}

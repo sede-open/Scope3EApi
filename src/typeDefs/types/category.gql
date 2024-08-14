@@ -1,0 +1,8 @@
+type Category {
+  id: UUID!
+  name: String!
+  systemName: CategoriesSystemName!
+  order: Int!
+  type: CategoryType!
+  createdAt: Date!
+}

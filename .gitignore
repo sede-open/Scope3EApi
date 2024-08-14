@@ -1,0 +1,24 @@
+node_modules
+build
+
+.env
+.env.test
+yarn-error.log
+package-lock.json
+.scannerwork/
+coverage
+.history
+
+# marketing email html 
+output.html
+
+# VS code debugger config
+.vscode
+
+# A playground script
+src/_devScripts
+.DS_Store
+
+# log files
+logs
+src/scripts/**/*.json

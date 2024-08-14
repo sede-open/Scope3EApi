@@ -1,0 +1,7 @@
+type CarbonIntensityConfig {
+  type: CarbonIntensityMetricType!
+  minValue: Float!
+  maxValue: Float!
+  numberOfDecimals: Int!
+  group: CarbonIntensityGroupType!
+}

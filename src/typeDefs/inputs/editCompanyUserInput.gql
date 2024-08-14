@@ -1,0 +1,7 @@
+input EditCompanyUserInput {
+  email: Email!
+  firstName: UserName!
+  lastName: UserName!
+  expertiseDomain: ExpertiseDomain
+  roleName: RoleName!
+}

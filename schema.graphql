@@ -1,0 +1,1307 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Checks if the company user belongs to has been vetted and approved"
+directive @belongsToApprovedCompany on FIELD_DEFINITION
+
+"Checks that the current logged in user has at least one of the specified roles"
+directive @hasRole(roles: [String!]!) on FIELD_DEFINITION
+
+directive @validateCompanyAccess(inputFieldsToValidate: [String!]!, permitAdmins: Boolean!) on FIELD_DEFINITION
+
+type AbsoluteTarget {
+  companyId: String!
+  includeCarbonOffset: Boolean!
+  scope1And2PrivacyType: TargetPrivacyType
+  scope1And2Reduction: Float!
+  scope1And2Year: Int!
+  scope3PrivacyType: TargetPrivacyType
+  scope3Reduction: Float
+  scope3Year: Int
+  strategy: TargetStrategyType!
+}
+
+input AcceptCompanyInviteInput {
+  companyId: UUID!
+}
+
+enum AmbitionPrivacyStatus {
+  NOT_SHARED
+  SHARED
+  SHARED_SBTI
+}
+
+input ApproveCompanyInput {
+  companyId: UUID!
+}
+
+enum AuthProvider {
+  "For external users only"
+  AKAMAI
+  "For invites for minimal querying and updates"
+  INVITE
+  "For internal users only"
+  PORT
+}
+
+type CarbonIntensity {
+  company: Company!
+  createdAt: Date!
+  createdByUser: User!
+  id: UUID!
+  intensityMetric: CarbonIntensityMetricType!
+  intensityValue: Float!
+  type: CarbonIntensityType!
+  updatedAt: Date
+  updatedByUser: User
+  year: Int!
+}
+
+type CarbonIntensityConfig {
+  group: CarbonIntensityGroupType!
+  maxValue: Float!
+  minValue: Float!
+  numberOfDecimals: Int!
+  type: CarbonIntensityMetricType!
+}
+
+enum CarbonIntensityGroupType {
+  COMMON
+  OTHER
+}
+
+enum CarbonIntensityMetricType {
+  "Business travel per passenger (km)"
+  BUSINESS_TRAVEL_PER_PASSENGER_KM
+  "Cubic metres (m3)"
+  CUBIC_METRES
+  "Equivalent product units"
+  EQUIVALENT_PRODUCT_UNITS
+  "GJ"
+  GJ
+  "Kg of raw milk"
+  KG_OF_RAW_MILK
+  "Kilometre (km)"
+  KM
+  "kWh (gross)"
+  KWH
+  "Letter and parcel delivery"
+  LETTER_AND_PARCEL_DELIVERY
+  "Litre of finished product"
+  LITRE_OF_FINISHED_PRODUCT
+  "Litre of produced beverage"
+  LITRE_OF_PRODUCED_BEVERAGE
+  "Litre packed"
+  LITRE_PACKED
+  "m3 of throughput"
+  M3_OF_THROUGHPUT
+  "Metric tons of agricultural product"
+  METRIC_TONS_OF_AGRIGULTURAL_PRODUCT
+  "Metric tons of cementitious materials"
+  METRIC_TONS_OF_CEMENTITIOUS_MATERIALS
+  "Metric tons of food produced"
+  METRIC_TONS_OF_FOOD_PRODUCED
+  "Metric tons of goods delivered"
+  METRIC_TONS_OF_GOODS_DELIVERED
+  "Metric tons of goods shipped per kilometre"
+  METRIC_TONS_OF_GOOD_SHIPPED_PER_KM
+  "Metric tons of paper"
+  METRIC_TONS_OF_PAPER
+  "Metric tons of pulp and paper"
+  METRIC_TONS_OF_PULP_PAPER
+  "Metric tons of stainless steel"
+  METRIC_TONS_OF_STAINLESS_STEEL
+  "Metric tons of steel produced"
+  METRIC_TONS_OF_STEEL_PRODUCED
+  "Metric tons of tires"
+  METRIC_TONS_OF_TIRES
+  "Metric ton-kilometre"
+  METRIC_TON_KM
+  "Metric ton production"
+  METRIC_TON_PRODUCTION
+  "Million engineering hours"
+  MILLION_ENGINEERING_HOURS
+  "Million Euro value added x million km distance travelled"
+  MILLION_EURO_VALUE_ADDED_X_MILLION_KM_DISTANCE_TRAVELLED
+  "Million gross metric ton kilometres"
+  MILLION_GROSS_METRIC_TON_KM
+  "MJ"
+  MJ
+  "MW installed"
+  MW_INSTALLED
+  "Nautical mile"
+  NAUTICAL_MILE
+  "Number of Employees"
+  NUMBER_OF_EMPLOYEES
+  "Number of Engines manufactured"
+  NUMBER_OF_ENGINES_MANUFACTORED
+  "Number of FTE's"
+  NUMBER_OF_FTE
+  "Number of vehicles produced"
+  NUMBER_VEHICLES_PRODUCED
+  "Operating Days"
+  OPERATING_DAYS
+  "Operating Hours"
+  OPERATING_HOURS
+  "Operational utilization per hour"
+  OPERATIONAL_UTILIZATION_PER_HOUR
+  "Operations per joule"
+  OPERATIONS_PER_JOULE
+  "Pairs of shoes"
+  PAIRS_OF_SHOES
+  "Passengers per kilometre"
+  PASSENGERS_PER_KM
+  "Per rolling cage"
+  PER_ROLLING_CAGE
+  "Per room night booked"
+  PER_ROOM_NIGHT_BOOKED
+  "Pints of products sold"
+  PINTS_OF_PRODUCT_SOLD
+  "Square metre (m2)"
+  SQUARE_METRE
+  "TJ"
+  TJ
+  "Track (km)"
+  TRACK_KM
+  "Units sold"
+  UNITS_SOLD
+  "$ of revenue"
+  USD_OF_REVENUE
+}
+
+enum CarbonIntensityType {
+  "Intensity has been calculated, rather than submitted by user"
+  ESTIMATED
+  "Submitted by user"
+  USER_SUBMITTED
+}
+
+enum CategoriesSystemName {
+  "Business travel"
+  BUSINESS_TRAVEL
+  "Capital goods"
+  CAPITAL_GOODS
+  "Downstream leased assets"
+  DOWNSTREAM_LEASED_ASSETS
+  "Downstream transportation and distribution"
+  DOWNSTREAM_TRANSPORTATION_AND_DISTRIBUTION
+  "Employee commuting"
+  EMPLOYEE_COMMUTING
+  "End of life treatment of sold products"
+  END_OF_LIFE_TREATMENT_OF_SOLD_PRODUCTS
+  "Franchises"
+  FRANCHISES
+  "Fuel and energy related activities"
+  FUEL_AND_ENERGY_RELATED_ACTIVITIES
+  "Investments"
+  INVESTMENTS
+  "Processing of sold products"
+  PROCESSING_OF_SOLD_PRODUCTS
+  "Purchased goods and services"
+  PURCHASED_GOODS_AND_SERVICES
+  "Upstream leased assets"
+  UPSTREAM_LEASED_ASSETS
+  "Upstream transportation and distribution"
+  UPSTREAM_TRANSPORTATION_AND_DISTRIBUTION
+  "Use of sold products"
+  USE_OF_SOLD_PRODUCTS
+  "Waste generated in operations"
+  WASTE_GENERATED_IN_OPERATIONS
+}
+
+type Category {
+  createdAt: Date!
+  id: UUID!
+  name: String!
+  order: Int!
+  systemName: CategoriesSystemName!
+  type: CategoryType!
+}
+
+enum CategoryType {
+  SCOPE_3
+}
+
+type ComanyDataPrivacyCompleteness {
+  companyId: UUID!
+  isComplete: Boolean!
+  numAbsoluteTargetPrivacyTypeMissing: Int!
+  numCorporateEmissionAccessMissing: Int!
+  numIntensityTargetPrivacyTypeMissing: Int!
+}
+
+type Companies {
+  data: [Company!]!
+  total: Int!
+}
+
+input CompaniesBenchmarkInput {
+  intensityMetric: CarbonIntensityMetricType!
+  intensityType: CarbonIntensityType!
+  limit: Int!
+  offset: Int!
+  order: OrderBy!
+  orderBy: CompaniesBenchmarkOrderBy!
+  selectedCompanyId: ID!
+}
+
+enum CompaniesBenchmarkOrderBy {
+  "by the annual emission variance"
+  ANNUAL_EMISSION_VARIANCE
+  "by the baseline emission year"
+  BASELINE_YEAR
+  "by the selected carbon intensity"
+  CARBON_INTENSITY_RATIO
+  "by the company name"
+  COMPANY_NAME
+  "by the network connection type"
+  COMPANY_RELATIONSHIP
+  "by the size of the company"
+  ESTIMATED_NUMBER_OF_EMPLOYEES
+  "by the total emission variance"
+  TOTAL_EMISSION_VARIANCE
+}
+
+type Company {
+  businessSection: String @deprecated(reason: "Use `CompanySectors` where sectorType is PRIMARY.")
+  companySectors: [CompanySector!]
+  createdAt: Date
+  createdByUser: User
+  dnbAddressLineOne: String
+  dnbAddressLineTwo: String
+  dnbCountry: String
+  dnbCountryIso: String
+  dnbPostalCode: String
+  dnbRegion: String
+  duns: String
+  hubspotId: String
+  id: UUID!
+  location: String
+  name: String!
+  reviewedAt: Date
+  reviewedByUser: User
+  status: CompanyStatus!
+  subSector: String @deprecated(reason: "Use `CompanySectors` where sectorType is SECONDARY.")
+  updatedAt: Date
+  updatedByUser: User
+  users: [User!]! @hasRole(roles: ["ADMIN"])
+}
+
+type CompanyBenchmark {
+  annualEmissionVariance: Float
+  baselineYear: Int
+  companyDuns: String!
+  companyId: String!
+  companyName: String!
+  companyRelationshipStatus: InviteStatus
+  companyRelationshipType: CompanyRelationshipType
+  emissionToIntensityRatio: Float
+  estimatedNumberOfEmployees: Int
+  totalEmissionVariance: Float
+}
+
+type CompanyBenchmarkRes {
+  data: [CompanyBenchmark!]!
+  total: Int!
+}
+
+input CompanyDataPrivacyCompletenessInput {
+  companyId: UUID!
+}
+
+type CompanyPrivacy {
+  allPlatform: Boolean!
+  companyId: UUID!
+  customerNetwork: Boolean!
+  id: UUID!
+  supplierNetwork: Boolean!
+}
+
+input CompanyPrivacyInput {
+  allPlatform: Boolean!
+  customerNetwork: Boolean!
+  supplierNetwork: Boolean!
+}
+
+type CompanyProfile {
+  absoluteTargetType: TargetPrivacyType
+  activeRelationship: CompanyRelationshipType
+  companyPrivacy: CompanyPrivacy
+  dataShareRequestSent: Boolean!
+  dnbCountryIso: String
+  dnbRegion: String
+  duns: String
+  estimatedNumberOfEmployees: Int
+  estimatedUsdOfRevenue: Float
+  id: UUID!
+  invitationPending: Boolean!
+  isActive: Boolean!
+  isPublic: Boolean!
+  name: String!
+  sectors: [String!]!
+}
+
+type CompanyRelationship {
+  ambitionPrivacyStatus: AmbitionPrivacyStatus
+  createdAt: Date!
+  customer: Company!
+  customerApprover: User
+  emissionPrivacyStatus: EmissionPrivacyStatus
+  id: UUID!
+  inviteType: CompanyRelationshipType!
+  note: String
+  status: InviteStatus!
+  supplier: Company!
+  supplierApprover: User
+  updatedAt: Date
+}
+
+type CompanyRelationshipRecommendation {
+  companyId: UUID
+  country: String
+  duns: String!
+  id: UUID!
+  name: String!
+  recommendationStatus: CompanyRelationshipRecommendationStatus!
+  region: String
+  relationshipType: CompanyRelationshipType!
+  sector: String
+}
+
+enum CompanyRelationshipRecommendationStatus {
+  ACCEPTED
+  DECLINED
+  UNACKNOWLEDGED
+}
+
+enum CompanyRelationshipType {
+  "A company's customer"
+  CUSTOMER
+  "A company's supplier"
+  SUPPLIER
+}
+
+type CompanySector {
+  company: Company!
+  createdAt: Date
+  createdByUser: User
+  hasBeenUpdated: Boolean
+  id: UUID!
+  sector: Sector!
+  sectorType: CompanySectorType!
+  updatedAt: Date
+  updatedByUser: User
+}
+
+input CompanySectorInput {
+  id: UUID!
+  sectorType: CompanySectorType!
+}
+
+enum CompanySectorType {
+  "Primary Industry/Sector for a company"
+  PRIMARY
+  "Secondary Industry/Sector for a company"
+  SECONDARY
+}
+
+enum CompanyStatus {
+  "Active company - a user has logged in at least once"
+  ACTIVE
+  "Company user has declined to join XYZ"
+  INVITATION_DECLINED
+  "Support team has approved the company. Awaiting user login"
+  PENDING_USER_ACTIVATION
+  "Invited company pending user confirmation. A user has not agreed to join XYZ"
+  PENDING_USER_CONFIRMATION
+  "Support team have vetoed the company"
+  VETOED
+  "User has accepted to join XYZ. Support team are vetting the company"
+  VETTING_IN_PROGRESS
+}
+
+enum ContactEmailSource {
+  EMAIL
+  EVENTS
+  OTHER
+  RECOMMENDED
+  SEARCH_ENGINE
+  SOCIAL_MEDIA
+  WORD_OF_MOUTH
+}
+
+type CorporateCarbonIntensityComparison {
+  companyIntensity: CorporateCarbonIntensityInfo!
+  sectorIntensity: CorporateCarbonIntensityInfo!
+  year: Int!
+}
+
+type CorporateCarbonIntensityInfo {
+  scope1: Float
+  scope2: Float
+  scope3: Float
+}
+
+type CorporateEmission {
+  carbonIntensities: [CarbonIntensity!]!
+  company: Company!
+  corporateEmissionAccess: CorporateEmissionAccess
+  createdAt: Date!
+  createdByUser: User!
+  headCount: Int
+  id: UUID!
+  offset: Float
+  scope1: Float!
+  scope2: Float!
+  scope2Type: Scope2Type!
+  scope3: Float
+  examplePercentage: Float
+  type: CorporateEmissionType!
+  updatedAt: Date!
+  updatedByUser: User
+  verificationFile: File
+  year: Int!
+}
+
+type CorporateEmissionAccess {
+  carbonIntensity: Boolean
+  carbonOffsets: Boolean
+  publicLink: SafeString
+  scope1And2: Boolean
+  scope3: Boolean
+}
+
+input CorporateEmissionAccessInput {
+  carbonIntensity: Boolean!
+  carbonOffsets: Boolean!
+  publicLink: SafeString
+  scope1And2: Boolean!
+  scope3: Boolean!
+}
+
+type CorporateEmissionRank {
+  businessSector: String
+  currentYear: Int!
+  hasPreviousYearVerificationFile: Boolean!
+  hasVerificationFile: Boolean!
+  id: UUID!
+  primarySector: String
+  rank: Int!
+  rankType: ReductionRankType!
+  reductionPercentage: Float!
+  scope1: Int!
+  scope2: Int!
+  scope3: Int
+  secondarySector: String
+  subSector: String
+}
+
+enum CorporateEmissionType {
+  "Actual emission levels"
+  ACTUAL
+  "Baseline emission submission"
+  BASELINE
+}
+
+type CorporateEmissionWithCarbonIntensityInfo {
+  carbonIntensities: [CarbonIntensity!]!
+  company: Company!
+  createdAt: Date!
+  createdByUser: User!
+  headCount: Int
+  id: UUID!
+  offset: Float
+  scope1: Float!
+  scope2: Float!
+  scope2Type: Scope2Type!
+  scope3: Float
+  examplePercentage: Float
+  type: CorporateEmissionType!
+  updatedAt: Date!
+  updatedByUser: User
+  verificationFile: File
+  year: Int!
+}
+
+input CreateCarbonIntensityData {
+  type: CarbonIntensityMetricType!
+  value: Float!
+}
+
+input CreateCompanyRelationshipInput {
+  customerId: UUID!
+  inviteType: CompanyRelationshipType!
+  note: SafeString
+  supplierId: UUID!
+}
+
+input CreateCompanyUserInput {
+  authProvider: AuthProvider!
+  companyId: UUID!
+  email: Email!
+  expertiseDomain: ExpertiseDomain
+  firstName: UserName!
+  lastName: UserName!
+  roleName: RoleName!
+}
+
+input CreateCorporateEmissionInput {
+  carbonIntensities: [CreateCarbonIntensityData!]
+  companyId: UUID!
+  corporateEmissionAccess: CorporateEmissionAccessInput!
+  headCount: Int
+  offset: Float
+  scope1: Float!
+  scope2: Float!
+  scope2Type: Scope2Type
+  scope3: Float
+  examplePercentage: Float
+  type: CorporateEmissionType!
+  verificationFileId: UUID
+  year: Int!
+}
+
+input CreateEmissionAllocationInput {
+  allocationMethod: EmissionAllocationMethod
+  customerEmissionId: UUID
+  customerId: UUID!
+  emissions: Float
+  note: SafeString
+  supplierEmissionId: UUID
+  supplierId: UUID!
+  year: Int!
+}
+
+input CreateTargetInput {
+  companyId: UUID!
+  includeCarbonOffset: Boolean!
+  scope1And2Reduction: Float!
+  scope1And2Year: Int!
+  scope3Reduction: Float
+  scope3Year: Int
+  strategy: TargetStrategyType!
+  targetType: TargetType!
+}
+
+input CreateUserInput {
+  authProvider: AuthProvider!
+  companyId: UUID!
+  email: Email!
+  expertiseDomain: ExpertiseDomain
+  firstName: UserName!
+  lastName: UserName!
+  roleName: RoleName!
+}
+
+type DataShareRequest {
+  companyId: UUID!
+  id: UUID!
+  targetCompanyId: UUID!
+}
+
+scalar Date
+
+input DeclineCompanyInviteInput {
+  companyId: UUID!
+  reason: SafeString!
+}
+
+input DeleteCorporateEmissionInput {
+  id: UUID!
+}
+
+input DeleteEmissionAllocationInput {
+  id: UUID!
+}
+
+input DeleteUserInput {
+  id: UUID!
+}
+
+type DnBAuthTokenResponse {
+  access_token: String!
+  expiresIn: Int!
+}
+
+type DnBTypeaheadResult {
+  addressCountryIsoAlpha2Code: String
+  addressLine1: String
+  addressRegionName: String
+  duns: String!
+  globalUltimateDuns: String
+  globalUltimatePrimaryName: String
+  isGlobalUltimate: Boolean!
+  primaryName: String!
+}
+
+input EditCompanyUserInput {
+  email: Email!
+  expertiseDomain: ExpertiseDomain
+  firstName: UserName!
+  lastName: UserName!
+  roleName: RoleName!
+}
+
+input EditPreferencesInput {
+  suppressTaskListPrompt: Boolean
+}
+
+input EditUserInput {
+  companyId: UUID
+  email: Email!
+  firstName: UserName
+  lastName: UserName
+  roleName: RoleName!
+}
+
+scalar Email
+
+enum EmailEnquiry {
+  "ADIP Ultra for CO2 removal for authenticated contact form"
+  ADIP_ULTRA
+  "Battery storage for authenticated contact form"
+  BATTERY_STORAGE
+  "Blue Hydrogen for heavy industries for authenticated contact form"
+  BLUE_HYDROGEN
+  "Cansolv for authenticated contact form"
+  CANSOLV
+  "CO2 Capture Technology for all vessels for authenticated contact form"
+  CO2_CAPTURE_TECHNOLOGY
+  "Compensate the CO2 emissions of your fleet for authenticated contact form"
+  CO2_FLEET_EMISSION_COMPENSATION
+  "Corporate Power Purchase Agreements for authenticated contact form"
+  CORPORATE_POWER_PURCHASE_AGREEMENTS
+  "Corrosion-free pipelines for offshore"
+  CORROSION_FREE_PIPELINES
+  "Decarbonise your fleet while fuelling (Example TapUp) for authenticated contact form"
+  DECARBONISE_YOUR_FLEET
+  "Demo request"
+  DEMO
+  "Maximise industrial efficiency with AI (Detect Technology)"
+  DETECT_TECHNOLOGY_INDUSTRIAL_EFFICIENCY
+  "Charging your electric vehicle solution for authenticated contact form"
+  EMOBILITY
+  "Energy management for authenticated contact form"
+  ENERGY_MANAGEMENT
+  "General query for public and authenticated contact form"
+  GENERAL_ENQUIRY
+  "Hydrogen for Industry and Transport vehicle solution for authenticated contact form"
+  HYDROGEN
+  "Smarter, Greener Fuel Management with i6"
+  I6_FUEL_MANAGEMENT
+  "Immersion cooling redefined for all vessels for authenticated contact form"
+  IMMERSION_COOLING
+  "Innowatts Carbon & Energy Analytics"
+  INNOWATTS_CARBON_ENERGY_ANALYTICS
+  "Decarbonise your road freight for all vessels for authenticated contact form"
+  INSTA_FREIGHT
+  "Joining enquiry for public contact form"
+  JOIN
+  "Leveraging Distributed Energy"
+  LEVERAGING_DISTRIBUTED_ENERGY
+  "Liquified Natural Gas for Transport solution for authenticated contact form"
+  LNG
+  "LO3 Energy Consumption Tracking"
+  LO3_ENERGY_CONSUMPTION_TRACKING
+  "Sustainable long-haul transport with Bio LNG fuel"
+  LONG_HAUL_BIO_LNG
+  "Low carbon solution for public contact form"
+  LOW_CARBON_SOLUTION
+  "Lubricant Solutions solution for authenticated contact form"
+  LUBRICANT_SOLUTIONS
+  "MachineMax for all vessels for authenticated contact form"
+  MACHINE_MAX
+  "Investing in Natural Ecosystems for authenticated contact form"
+  NATURE_BASED
+  "Onsite Renewable Power Generation"
+  ONSITE_RENEWABLE_POWER_GENERATION
+  "Onsite solar for authenticated contact form"
+  ONSITE_SOLAR
+  "Reducing CO2 intensity with Example Chemicals for all vessels for authenticated contact form"
+  REDUCING_CO2_INTENSITY_WITH_ABCD_CHEMICALS
+  "Renewable Energy Certificates"
+  RENEWABLE_ENERGY_CERTIFICATES
+  "Decarbonisation with Renewable Natural Gas"
+  RENEWABLE_NATURAL_GAS
+  "Renewable Power"
+  RENEWABLE_POWER
+  "Make Savings with Simulation Technology"
+  SIMULATION_TECHNOLOGY
+  "Solar Solutions with Expert Advice"
+  SOLAR_SOLUTION
+  "Sustainable Aviation Fuel for authenticated contact form"
+  SUSTAINABLE_AVIATION
+  "Sustainable Bitumen for all vessels for authenticated contact form"
+  SUSTAINABLE_BITUMEN
+  "Sustainable Land Asset Enhancement"
+  SUSTAINABLE_LAND_ASSET_ENHANCEMENT
+  "Telematics to reduce fuel consumption for authenticated contact form"
+  TELEMATICS
+  "JAWS low-cost software for all vessels for authenticated contact form"
+  VESSELS_SOFTWARE
+}
+
+type EmissionAllocation {
+  addedToCustomerScopeTotal: Boolean
+  allocationMethod: EmissionAllocationMethod
+  category: Category
+  categoryId: UUID
+  createdAt: Date!
+  customer: Company!
+  customerApprover: User
+  customerEmissionId: UUID
+  customerId: UUID!
+  emissions: Float
+  id: UUID!
+  note: String
+  status: EmissionAllocationStatus!
+  supplier: Company
+  supplierApprover: User
+  supplierId: UUID
+  type: EmissionAllocationType!
+  year: Int!
+}
+
+enum EmissionAllocationDirection {
+  "Emissions allocated to the company by its suppliers"
+  EMISSION_ALLOCATED_BY_SUPPLIERS
+  "Emissions allocated to the company customers"
+  EMISSION_ALLOCATED_TO_CUSTOMERS
+}
+
+enum EmissionAllocationMethod {
+  ECONOMICAL
+  OTHER
+  PHYSICAL
+}
+
+enum EmissionAllocationStatus {
+  APPROVED
+  AWAITING_APPROVAL
+  REJECTED
+  REQUESTED
+  REQUEST_DISMISSED
+}
+
+enum EmissionAllocationType {
+  SCOPE_3
+}
+
+enum EmissionPrivacyStatus {
+  NOT_SHARED
+  SHARED
+}
+
+input EnquiryEmailInput {
+  company: SafeString
+  consent: Boolean!
+  email: Email!
+  enquiries: [EmailEnquiry!]!
+  message: SafeString!
+  name: UserName!
+  regions: [RegionName!]
+}
+
+enum ExpertiseDomain {
+  "Business Development"
+  BUSINESS_DEVELOPMENT
+  "Finance"
+  FINANCE
+  "Other"
+  OTHER
+  "Procurement"
+  PROCUREMENT
+  "Sustainability"
+  SUSTAINABILITY
+}
+
+type File {
+  azureBlobFilename: String!
+  company: Company!
+  createdByUser: User!
+  id: UUID!
+  mimetype: String!
+  originalFilename: String!
+  sizeInBytes: Float!
+}
+
+type IntensityTarget {
+  companyId: String!
+  includeCarbonOffset: Boolean!
+  intensityMetric: CarbonIntensityMetricType!
+  intensityValue: Float!
+  scope1And2PrivacyType: TargetPrivacyType
+  scope1And2Reduction: Float!
+  scope1And2Year: Int!
+  scope3PrivacyType: TargetPrivacyType
+  scope3Reduction: Float
+  scope3Year: Int
+  strategy: TargetStrategyType!
+}
+
+type Invitation {
+  createdAt: Date!
+  customerName: String!
+  id: UUID!
+  inviteType: CompanyRelationshipType!
+  note: String
+  status: InviteStatus!
+  supplierName: String!
+  updatedAt: Date
+}
+
+input InviteAndConnectToCompanyInput {
+  companyDuns: SafeString!
+  email: Email!
+  firstName: UserName!
+  inviteType: CompanyRelationshipType!
+  lastName: UserName!
+  note: SafeString
+}
+
+input InviteCompanyEmailInput {
+  invitee: Invitee!
+  inviter: Inviter!
+}
+
+enum InviteStatus {
+  APPROVED
+  AWAITING_CUSTOMER_APPROVAL
+  AWAITING_SUPPLIER_APPROVAL
+  REJECTED_BY_CUSTOMER
+  REJECTED_BY_SUPPLIER
+}
+
+input Invitee {
+  company: SafeString!
+  email: Email!
+  name: SafeString!
+}
+
+input Inviter {
+  company: SafeString!
+  email: Email!
+  name: SafeString!
+}
+
+type Me {
+  authProvider: AuthProvider!
+  canEditCompanyMembers: Boolean!
+  canEditCompanyRelationships: Boolean!
+  canEditCompanySectors: Boolean!
+  canEditEmissionAllocations: Boolean!
+  canEditSupplyDashboard: Boolean!
+  canInviteNewCompanyMembers: Boolean!
+  canRemoveCompanyMembers: Boolean!
+  canSubmitDataPrivacyInfo: Boolean!
+  canViewCompaniesAdminDashboard: Boolean!
+  canViewCompanyRelationships: Boolean!
+  canViewEmissionAllocations: Boolean!
+  canViewSupplyDashboard: Boolean!
+  canViewUsersAdminDashboard: Boolean!
+  company: Company
+  email: String!
+  expertiseDomain: ExpertiseDomain
+  firstName: String!
+  id: UUID!
+  lastName: String!
+  launchDarklyHash: String!
+  preferences: Preferences
+  roles: [Role!]!
+  status: UserStatus!
+}
+
+type Mutation {
+  acceptCompanyInvite(input: AcceptCompanyInviteInput!): String! @hasRole(roles: ["SUPPLIER_EDITOR"])
+  activateUserAndCompany: User!
+  approveCompany(input: ApproveCompanyInput!): Company! @hasRole(roles: ["ADMIN"])
+  createCompanyPrivacy(input: CompanyPrivacyInput!): CompanyPrivacy @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  createCompanyRelationship(input: CreateCompanyRelationshipInput!): CompanyRelationship! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  createCompanyUser(input: CreateCompanyUserInput!): User! @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  createCorporateEmission(input: CreateCorporateEmissionInput!): CorporateEmission @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  createEmissionAllocation(input: CreateEmissionAllocationInput!): EmissionAllocation! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  createTarget(input: CreateTargetInput!): AbsoluteTarget @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  createUser(input: CreateUserInput!): User! @hasRole(roles: ["ADMIN"])
+  dataShareRequest(targetCompanyId: UUID!): DataShareRequest! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  declineCompanyInvite(input: DeclineCompanyInviteInput!): String! @hasRole(roles: ["SUPPLIER_EDITOR"])
+  deleteCorporateEmission(input: DeleteCorporateEmissionInput!): String @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  deleteEmissionAllocation(input: DeleteEmissionAllocationInput!): String! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  deleteUser(input: DeleteUserInput!): String! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN"])
+  editCompanyUser(input: EditCompanyUserInput!): User! @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  editPreferences(input: EditPreferencesInput!): Preferences
+  editUser(input: EditUserInput!): User! @hasRole(roles: ["ADMIN"])
+  enquiryEmail(input: EnquiryEmailInput!): String! @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  inviteAndConnectToCompany(input: InviteAndConnectToCompanyInput!): CompanyRelationship! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  inviteCompanyEmail(input: InviteCompanyEmailInput!): String @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  resendAkamaiInvite(input: ResentAkamaiInviteInput!): String! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN"])
+  resendUserInviteToJoinEmail(input: ResendUserInviteToJoinEmailInput!): String! @hasRole(roles: ["ADMIN"])
+  saveTargets(input: SaveTargetsInput!): SimpleSuccess! @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanyPrivacy(input: CompanyPrivacyInput!): CompanyPrivacy @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanyRelationship(input: UpdateCompanyRelationshipInput!): CompanyRelationship! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  updateCompanyRelationshipRecommendationStatus(id: UUID!, status: CompanyRelationshipRecommendationStatus!): String! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  updateCompanySectors(input: UpdateCompanySectorsInput!): [CompanySector!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateCompanyStatus(input: UpdateCompanyStatusInput!): Company! @hasRole(roles: ["ADMIN"])
+  updateCorporateEmission(input: UpdateCorporateEmissionInput!): CorporateEmission @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateEmissionAllocation(input: UpdateEmissionAllocationInput!): EmissionAllocation! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateMe(input: UpdateMeInput!): Me! @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  updateTarget(input: UpdateTargetInput!): AbsoluteTarget @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR"])
+  updateUserSolutionInterests(input: UpdateUserSolutionInterestsInput!): [UserSolutionInterest!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  vetoCompany(input: VetoCompanyInput!): Company! @hasRole(roles: ["ADMIN"])
+}
+
+type NetworkSummary {
+  companyId: UUID!
+  numCustomers: Int!
+  numPendingInvitations: Int!
+  numSuppliers: Int!
+  pendingInvitations: [Invitation!]!
+}
+
+enum OrderBy {
+  "Order results ascending"
+  ASC
+  "Order results descending"
+  DESC
+}
+
+scalar PageSize
+
+type Preferences {
+  id: UUID!
+  suppressTaskListPrompt: Boolean!
+}
+
+type Query {
+  baseline(companyId: UUID!): CorporateEmission @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  carbonIntensities(companyId: UUID!): [CarbonIntensity!]! @belongsToApprovedCompany
+  carbonIntensityConfig: [CarbonIntensityConfig!]!
+  categories: [Category!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER", "ADMIN"])
+  companies(limit: Int, offset: Int): Companies! @belongsToApprovedCompany @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR"])
+  companiesBenchmark(input: CompaniesBenchmarkInput): CompanyBenchmarkRes!
+  companyByDuns(duns: String!): Company @belongsToApprovedCompany @hasRole(roles: ["ACCOUNT_MANAGER", "SUPPLIER_EDITOR"])
+  companyDataPrivacyCompleteness(companyId: UUID!): ComanyDataPrivacyCompleteness @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"]) @belongsToApprovedCompany
+  companyPrivacy: CompanyPrivacy @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_VIEWER"])
+  companyProfile(companyId: UUID!): CompanyProfile! @hasRole(roles: ["SUPPLIER_VIEWER"])
+  companyRelationshipRecommendations(companyId: UUID!, recommendationStatuses: [CompanyRelationshipRecommendationStatus!]!, relationshipTypes: [CompanyRelationshipType!]!): [CompanyRelationshipRecommendation!]! @validateCompanyAccess(inputFieldsToValidate: ["companyId"], permitAdmins: true) @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  companyRelationships(companyId: UUID!, relationshipType: CompanyRelationshipType, status: InviteStatus): [CompanyRelationship!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  companySectors(companyId: UUID!): [CompanySector!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  companyUserRoles: [Role!]!
+  companyUsers(roleNames: [RoleName]): [User!]! @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateCarbonIntensityComparisons(companyId: UUID!, years: [Int!]!): [CorporateCarbonIntensityComparison!] @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateEmissionRank(companyId: UUID!, year: Int!): CorporateEmissionRank @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateEmissionRanks(companyId: UUID!, year: Int!): [CorporateEmissionRank!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateEmissions(companyId: UUID!, year: Int): [CorporateEmission!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  dnbTypeaheadSearch(searchTerm: String!): [DnBTypeaheadResult!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN", "ACCOUNT_MANAGER"])
+  emissionAllocations(
+    companyId: UUID!
+    "emission allocations by the companies suppliers or their allocations to customers"
+    emissionAllocation: EmissionAllocationDirection
+    statuses: [EmissionAllocationStatus!]
+    year: Int
+  ): [EmissionAllocation!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  emissionsAllocatedToMyCompany(supplierId: UUID!): [EmissionAllocation!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  latestCorporateEmission(companyId: UUID!): CorporateEmission @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  me: Me!
+  networkSummary: NetworkSummary!
+  preferences: Preferences
+  roles(orderBy: OrderBy): [Role!]! @hasRole(roles: ["ADMIN"])
+  sectors(pageNumber: Int, pageSize: PageSize, searchTerm: SafeString): [Sector!]! @belongsToApprovedCompany @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  solutionInterests: [SolutionInterest!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  target(companyId: UUID!): AbsoluteTarget @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  targets(companyId: UUID!): Targets @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  tribeJwt: TribeJwt! @hasRole(roles: ["SUPPLIER_VIEWER"])
+  tribeUsageStats: TribeUsageStats! @hasRole(roles: ["SUPPLIER_VIEWER"])
+  user(email: String!): User @hasRole(roles: ["ADMIN"])
+  userSolutionInterests: [UserSolutionInterest!]! @belongsToApprovedCompany @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  users(limit: Int, offset: Int, orderBy: OrderBy, sortBy: String): Users! @hasRole(roles: ["ADMIN"])
+}
+
+enum ReductionRankType {
+  "Other company rank"
+  OTHER
+  "Selected company rank"
+  SELECTED
+}
+
+enum RegionName {
+  "Africa regions"
+  AFRICA
+  "Americas regions"
+  AMERICAS
+  "Asia regions"
+  ASIA
+  "Europe regions"
+  EUROPE
+  "Oceania regions"
+  OCEANIA
+}
+
+input ResendUserInviteToJoinEmailInput {
+  userId: UUID!
+}
+
+input ResentAkamaiInviteInput {
+  userId: UUID!
+}
+
+type Role {
+  id: UUID!
+  name: RoleName!
+}
+
+enum RoleName {
+  "Account manager"
+  ACCOUNT_MANAGER
+  "Internal user"
+  ADMIN
+  "External user with editor rights"
+  SUPPLIER_EDITOR
+  "External user with viewer rights"
+  SUPPLIER_VIEWER
+}
+
+scalar SafeString
+
+input SaveTargetsInput {
+  companyId: UUID!
+  toSave: [SaveTargetsTargetInstance!]!
+}
+
+input SaveTargetsTargetInstance {
+  includeCarbonOffset: Boolean!
+  intensityMetric: CarbonIntensityMetricType
+  scope1And2PrivacyType: TargetPrivacyType!
+  scope1And2Reduction: Float!
+  scope1And2Year: Int!
+  scope3PrivacyType: TargetPrivacyType
+  scope3Reduction: Float
+  scope3Year: Int
+  strategy: TargetStrategyType!
+  targetType: TargetType!
+}
+
+enum SbtiSystemName {
+  AIR_FREIGHT_TRANSPORT
+  BANKS_INSURANCE
+  CHEMICALS
+  CONSTRUCTION_ENGINEERING
+  CONSTRUCTION_MATERIALS
+  ELECTRICAL_EQUIPMENT_MACHINERY
+  FOREST_PAPER_PRODUCTS
+  GROUND_TRUCK_TRANSPORT
+  MARITIME_TRANSPORT
+  OIL_GAS
+  PROFESSIONAL_SERVICES
+  RETAILING
+  SOFTWARE_AND_SERVICE
+  TECHNOLOGY_HARDWARE_EQUIPMENT
+  TRADING_COMPANY_COMMERCIAL_SERVICE
+  WATER_UTILITIES
+}
+
+enum Scope2Type {
+  "Location-based scope 2 emissions"
+  LOCATION
+  "Market-based scope 2 emissions"
+  MARKET
+}
+
+type Sector {
+  createdAt: Date!
+  division: String!
+  id: UUID!
+  industryCode: String!
+  industryType: String!
+  name: String!
+  sourceName: String!
+  updatedAt: Date!
+}
+
+enum SectorSourceType {
+  "Industry/sector has been retrieved from Dun and Bradstreet API"
+  DNB
+}
+
+type SimpleSuccess {
+  success: Boolean!
+}
+
+type SolutionInterest {
+  createdAt: Date!
+  id: ID!
+  name: String!
+  systemName: SolutionInterestsSystemName!
+  updatedAt: Date!
+}
+
+enum SolutionInterestsSystemName {
+  "Behaviour change"
+  BEHAVIOUR_CHANGE
+  "Carbon capture"
+  CARBON_CAPTURE
+  "Fuel switch"
+  FUEL_SWITCH
+  "Material and process efficiency"
+  MATERIAL_AND_PROCESS_EFFICIENCY
+  "Nature based solutions"
+  NATURE_BASED_SOLUTIONS
+  "Recycling"
+  RECYCLING
+  "Renewable heat"
+  RENEWABLE_HEAT
+  "Renewable power"
+  RENEWABLE_POWER
+}
+
+enum TargetPrivacyType {
+  PRIVATE
+  PUBLIC
+  SCIENCE_BASED_INITIATIVE
+}
+
+enum TargetScopeType {
+  "Ambition that includes scope 1 and 2 only"
+  SCOPE_1_2
+  "Ambition that includes scope 3 only"
+  SCOPE_3
+}
+
+enum TargetStrategyType {
+  "Aggressive emissions reduction strategy"
+  AGGRESSIVE
+  "Moderate emissions reduction strategy"
+  MODERATE
+  "Passive emissions reduction strategy"
+  PASSIVE
+}
+
+enum TargetType {
+  "Absolute Ambition Target Type"
+  ABSOLUTE
+  "Intensity Ambition Target Type"
+  INTENSITY
+}
+
+type Targets {
+  absolute: [AbsoluteTarget!]!
+  intensity: [IntensityTarget!]!
+}
+
+type TribeJwt {
+  token: String!
+}
+
+type TribeUsageStats {
+  members: Int!
+  replies: Int!
+  topics: Int!
+}
+
+scalar UUID
+
+input UpdateCompanyRelationshipInput {
+  id: UUID!
+  note: SafeString
+  status: InviteStatus
+}
+
+input UpdateCompanySectorsInput {
+  companyId: UUID!
+  sectors: [CompanySectorInput!]!
+}
+
+input UpdateCompanyStatusInput {
+  id: UUID!
+  status: CompanyStatus!
+}
+
+input UpdateCorporateEmissionInput {
+  carbonIntensities: [CreateCarbonIntensityData!]
+  corporateEmissionAccess: CorporateEmissionAccessInput!
+  headCount: Int
+  id: UUID!
+  offset: Float
+  scope1: Float!
+  scope2: Float!
+  scope2Type: Scope2Type!
+  scope3: Float
+  examplePercentage: Float
+  type: CorporateEmissionType!
+  verificationFileId: UUID
+  year: Int!
+}
+
+input UpdateEmissionAllocationInput {
+  addedToCustomerScopeTotal: Boolean
+  allocationMethod: EmissionAllocationMethod
+  categoryId: UUID
+  customerEmissionId: UUID
+  emissions: Float
+  id: UUID!
+  note: SafeString
+  status: EmissionAllocationStatus
+  supplierEmissionId: UUID
+}
+
+input UpdateMeInput {
+  expertiseDomain: ExpertiseDomain
+  firstName: UserName
+  lastName: UserName
+}
+
+input UpdateTargetInput {
+  companyId: UUID!
+  includeCarbonOffset: Boolean!
+  intensityMetric: CarbonIntensityMetricType
+  scope1And2Reduction: Float!
+  scope1And2Year: Int!
+  scope3Reduction: Float
+  scope3Year: Int
+  strategy: TargetStrategyType!
+  targetType: TargetType!
+}
+
+input UpdateUserSolutionInterestsInput {
+  solutionInterestIds: [UUID!]!
+}
+
+type User {
+  authProvider: AuthProvider!
+  company: Company
+  email: String!
+  expertiseDomain: ExpertiseDomain
+  firstName: String!
+  hubspotId: String
+  id: UUID!
+  lastName: String!
+  preferences: Preferences
+  roles: [Role!]
+  status: UserStatus!
+}
+
+scalar UserName
+
+type UserSolutionInterest {
+  createdAt: Date!
+  id: UUID!
+  solutionInterest: SolutionInterest!
+  updatedAt: Date!
+}
+
+enum UserStatus {
+  "Active user"
+  ACTIVE
+  "Invited user whose company has not been approved. No access to the app"
+  PENDING
+}
+
+type Users {
+  count: Int!
+  data: [User!]!
+}
+
+input VetoCompanyInput {
+  companyId: UUID!
+}

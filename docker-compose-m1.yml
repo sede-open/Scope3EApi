@@ -1,0 +1,35 @@
+#use this docker compose file when running dependencies on an Apple M1 arm64 chip
+#Mssql Server does not intend to support arm64 architecture therefore an alternative is used for local development
+#azure-sql-edge a slimmed down version of Sql Server 2019 which runs on arm64
+
+version: '3.3'
+
+services:
+  db:
+    image: mcr.microsoft.com/azure-sql-edge:1.0.5
+    restart: always
+    environment:
+      - ACCEPT_EULA='Y'
+      - MSSQL_SA_PASSWORD=${DBPASS}
+    ports:
+      - '127.0.0.1:1433:1433'
+
+  mssql-tools: 
+    image: mcr.microsoft.com/mssql-tools:latest
+    environment:
+      - SA_PASSWORD=${DBPASS}
+      - DB_HOST_ENTRYSCRIPT=db
+    volumes:
+      - ./fixtures/mssql:/usr/src/app
+    depends_on:
+      - "db"
+    working_dir: /usr/src/app
+    command: sh -c ' ./waitforit.sh -h db -t 30 -- ./entrypoint.sh'
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis-server /redis.conf --requirepass ${REDIS_PASSWORD}

@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: always
+    environment:
+      - ACCEPT_EULA='Y'
+      - SA_PASSWORD=${DBPASS}
+      - DB_USER=${DBUSER}
+      - DB_ROOT_PASSWORD=${DBPASS}
+      - DB_PASSWORD=${DBPASS}
+      - DB_DATABASE=${DBNAME}
+      - DB_HOST_ENTRYSCRIPT=0.0.0.0
+    ports:
+      - '127.0.0.1:1433:1433'
+    volumes:
+      - ./fixtures/mssql:/usr/src/app
+    working_dir: /usr/src/app
+    command: sh -c ' ./waitforit.sh -h localhost -t 30 -- ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis-server /redis.conf --requirepass ${REDIS_PASSWORD}

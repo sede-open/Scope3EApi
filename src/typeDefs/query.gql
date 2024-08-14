@@ -1,0 +1,118 @@
+type Query {
+  users(orderBy: OrderBy, sortBy: String, offset: Int, limit: Int): Users! @hasRole(roles: ["ADMIN"])
+  roles(orderBy: OrderBy): [Role!]! @hasRole(roles: ["ADMIN"])
+  user(email: String!): User @hasRole(roles: ["ADMIN"])
+  companies(offset: Int, limit: Int): Companies!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR"])
+  me: Me!
+  corporateEmissions(companyId: UUID!, year: Int): [CorporateEmission!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  latestCorporateEmission(companyId: UUID!): CorporateEmission
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  baseline(companyId: UUID!): CorporateEmission
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  target(companyId: UUID!): AbsoluteTarget
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  targets(companyId: UUID!): Targets
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateEmissionRanks(
+    companyId: UUID!
+    year: Int!
+  ): [CorporateEmissionRank!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateEmissionRank(companyId: UUID!, year: Int!): CorporateEmissionRank
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  corporateCarbonIntensityComparisons(
+    companyId: UUID!
+    years: [Int!]!
+  ): [CorporateCarbonIntensityComparison!]
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  preferences: Preferences
+  companyRelationships(
+    companyId: UUID!
+    relationshipType: CompanyRelationshipType
+    status: InviteStatus
+  ): [CompanyRelationship!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  emissionAllocations(
+    companyId: UUID!
+    "emission allocations by the companies suppliers or their allocations to customers"
+    emissionAllocation: EmissionAllocationDirection
+    statuses: [EmissionAllocationStatus!]
+    year: Int
+  ): [EmissionAllocation!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  emissionsAllocatedToMyCompany(
+    supplierId: UUID!
+  ): [EmissionAllocation!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  categories: [Category!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER", "ADMIN"])
+  sectors(
+    searchTerm: SafeString
+    pageNumber: Int
+    pageSize: PageSize
+  ): [Sector!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["ADMIN", "SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  companySectors(companyId: UUID!): [CompanySector!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  dnbTypeaheadSearch(searchTerm: String!): [DnBTypeaheadResult!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ADMIN", "ACCOUNT_MANAGER"])
+  companyByDuns(duns: String!): Company
+    @belongsToApprovedCompany
+    @hasRole(roles: ["ACCOUNT_MANAGER", "SUPPLIER_EDITOR"])
+  solutionInterests: [SolutionInterest!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  userSolutionInterests: [UserSolutionInterest!]!
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  carbonIntensities(companyId: UUID!): [CarbonIntensity!]!
+    @belongsToApprovedCompany
+  companyUsers(roleNames: [RoleName]): [User!]!
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+  carbonIntensityConfig: [CarbonIntensityConfig!]!
+  companyUserRoles: [Role!]!
+  tribeUsageStats: TribeUsageStats! @hasRole(roles: ["SUPPLIER_VIEWER"])
+  tribeJwt: TribeJwt! @hasRole(roles: ["SUPPLIER_VIEWER"])
+  companyPrivacy: CompanyPrivacy
+    @belongsToApprovedCompany
+    @hasRole(roles: ["SUPPLIER_VIEWER"])
+  companyDataPrivacyCompleteness(
+    companyId: UUID!
+  ): ComanyDataPrivacyCompleteness
+    @hasRole(roles: ["SUPPLIER_EDITOR", "SUPPLIER_VIEWER"])
+    @belongsToApprovedCompany
+  networkSummary: NetworkSummary!
+  companyRelationshipRecommendations(
+    companyId: UUID!
+    relationshipTypes: [CompanyRelationshipType!]!
+    recommendationStatuses: [CompanyRelationshipRecommendationStatus!]!
+  ): [CompanyRelationshipRecommendation!]!
+    @validateCompanyAccess(
+      inputFieldsToValidate: ["companyId"]
+      permitAdmins: true
+    )
+    @hasRole(roles: ["SUPPLIER_EDITOR", "ACCOUNT_MANAGER"])
+  companiesBenchmark(
+    input: CompaniesBenchmarkInput
+  ): CompanyBenchmarkRes!
+  companyProfile(companyId: UUID!): CompanyProfile!
+    @hasRole(roles: ["SUPPLIER_VIEWER"])
+}

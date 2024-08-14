@@ -1,0 +1,9 @@
+input CompaniesBenchmarkInput {
+  selectedCompanyId: ID!
+  limit: Int!
+  offset: Int!
+  intensityMetric: CarbonIntensityMetricType!
+  intensityType: CarbonIntensityType!
+  orderBy: CompaniesBenchmarkOrderBy!
+  order: OrderBy!
+}

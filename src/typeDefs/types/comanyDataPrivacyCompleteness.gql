@@ -1,0 +1,7 @@
+type ComanyDataPrivacyCompleteness {
+  isComplete: Boolean!
+  companyId: UUID!
+  numCorporateEmissionAccessMissing: Int!
+  numIntensityTargetPrivacyTypeMissing: Int!
+  numAbsoluteTargetPrivacyTypeMissing: Int!
+}

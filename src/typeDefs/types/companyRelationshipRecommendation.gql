@@ -1,0 +1,11 @@
+type CompanyRelationshipRecommendation {
+  id: UUID!
+  duns: String!
+  relationshipType: CompanyRelationshipType!
+  recommendationStatus: CompanyRelationshipRecommendationStatus!
+  name: String!
+  companyId: UUID
+  sector: String
+  region: String
+  country: String
+}

@@ -1,0 +1,6 @@
+scalar Date
+scalar SafeString
+scalar Email
+scalar UserName
+scalar PageSize
+scalar UUID

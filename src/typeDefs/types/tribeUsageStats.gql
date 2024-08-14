@@ -1,0 +1,5 @@
+type TribeUsageStats {
+  topics: Int!
+  replies: Int!
+  members: Int!
+}

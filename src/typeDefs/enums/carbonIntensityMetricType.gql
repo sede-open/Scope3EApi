@@ -1,0 +1,98 @@
+enum CarbonIntensityMetricType {
+  "$ of revenue"
+  USD_OF_REVENUE
+  "Number of Employees"
+  NUMBER_OF_EMPLOYEES
+  "Number of FTE's"
+  NUMBER_OF_FTE
+  "Metric ton production"
+  METRIC_TON_PRODUCTION
+  "Metric ton-kilometre"
+  METRIC_TON_KM
+  "Square metre (m2)"
+  SQUARE_METRE
+  "Units sold"
+  UNITS_SOLD
+  "Business travel per passenger (km)"
+  BUSINESS_TRAVEL_PER_PASSENGER_KM
+  "Cubic metres (m3)"
+  CUBIC_METRES
+  "Number of Engines manufactured"
+  NUMBER_OF_ENGINES_MANUFACTORED
+  "Equivalent product units"
+  EQUIVALENT_PRODUCT_UNITS
+  "GJ"
+  GJ
+  "Kg of raw milk"
+  KG_OF_RAW_MILK
+  "Kilometre (km)"
+  KM
+  "kWh (gross)"
+  KWH
+  "Letter and parcel delivery"
+  LETTER_AND_PARCEL_DELIVERY
+  "Litre of finished product"
+  LITRE_OF_FINISHED_PRODUCT
+  "Litre of produced beverage"
+  LITRE_OF_PRODUCED_BEVERAGE
+  "Litre packed"
+  LITRE_PACKED
+  "m3 of throughput"
+  M3_OF_THROUGHPUT
+  "Metric tons of agricultural product"
+  METRIC_TONS_OF_AGRIGULTURAL_PRODUCT
+  "Metric tons of cementitious materials"
+  METRIC_TONS_OF_CEMENTITIOUS_MATERIALS
+  "Metric tons of food produced"
+  METRIC_TONS_OF_FOOD_PRODUCED
+  "Metric tons of goods delivered"
+  METRIC_TONS_OF_GOODS_DELIVERED
+  "Metric tons of goods shipped per kilometre"
+  METRIC_TONS_OF_GOOD_SHIPPED_PER_KM
+  "Metric tons of paper"
+  METRIC_TONS_OF_PAPER
+  "Metric tons of pulp and paper"
+  METRIC_TONS_OF_PULP_PAPER
+  "Metric tons of stainless steel"
+  METRIC_TONS_OF_STAINLESS_STEEL
+  "Metric tons of steel produced"
+  METRIC_TONS_OF_STEEL_PRODUCED
+  "Metric tons of tires"
+  METRIC_TONS_OF_TIRES
+  "Million engineering hours"
+  MILLION_ENGINEERING_HOURS
+  "Million Euro value added x million km distance travelled"
+  MILLION_EURO_VALUE_ADDED_X_MILLION_KM_DISTANCE_TRAVELLED
+  "Million gross metric ton kilometres"
+  MILLION_GROSS_METRIC_TON_KM
+  "MJ"
+  MJ
+  "MW installed"
+  MW_INSTALLED
+  "Nautical mile"
+  NAUTICAL_MILE
+  "Operational utilization per hour"
+  OPERATIONAL_UTILIZATION_PER_HOUR
+  "Operations per joule"
+  OPERATIONS_PER_JOULE
+  "Operating Hours"
+  OPERATING_HOURS
+  "Operating Days"
+  OPERATING_DAYS
+  "Pairs of shoes"
+  PAIRS_OF_SHOES
+  "Passengers per kilometre"
+  PASSENGERS_PER_KM
+  "Per rolling cage"
+  PER_ROLLING_CAGE
+  "Pints of products sold"
+  PINTS_OF_PRODUCT_SOLD
+  "Per room night booked"
+  PER_ROOM_NIGHT_BOOKED
+  "TJ"
+  TJ
+  "Track (km)"
+  TRACK_KM
+  "Number of vehicles produced"
+  NUMBER_VEHICLES_PRODUCED
+}

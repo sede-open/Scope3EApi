@@ -1,0 +1,4 @@
+type CompanyBenchmarkRes {
+  data: [CompanyBenchmark!]!
+  total: Int!
+}

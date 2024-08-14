@@ -1,0 +1,12 @@
+type CompanyBenchmark {
+  companyId: String!
+  companyDuns: String!
+  companyName: String!
+  estimatedNumberOfEmployees: Int
+  baselineYear: Int
+  totalEmissionVariance: Float
+  annualEmissionVariance: Float
+  emissionToIntensityRatio: Float
+  companyRelationshipStatus: InviteStatus
+  companyRelationshipType: CompanyRelationshipType
+}

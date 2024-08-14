@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`benchmark when the companies' privacy settings are set to private returns the company name, estimated number of employees, company relationship 1`] = `3`;
+
+exports[`benchmark when the companies' privacy settings are set to public returns the benchmark data correctly 1`] = `3`;
+
+exports[`benchmark when the companies' privacy settings give access to the customers returns the supplier companies benchmark data correctly 1`] = `1`;
+
+exports[`benchmark when the companies' privacy settings give access to the suppliers returns the customer companies benchmark data correctly 1`] = `1`;

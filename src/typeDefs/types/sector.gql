@@ -1,0 +1,11 @@
+type Sector {
+  id: UUID!
+  name: String!
+  industryCode: String!
+  industryType: String!
+  sourceName: String!
+  name: String!
+  division: String!
+  createdAt: Date!
+  updatedAt: Date!
+}

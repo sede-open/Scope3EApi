@@ -1,0 +1,1 @@
+export const MAX_PDF_FILE_SIZE_IN_BYTES = 20 * 1024 * 1024; // 20MB

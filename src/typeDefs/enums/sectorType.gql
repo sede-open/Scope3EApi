@@ -1,0 +1,6 @@
+enum CompanySectorType {
+  "Primary Industry/Sector for a company"
+  PRIMARY
+  "Secondary Industry/Sector for a company"
+  SECONDARY
+}

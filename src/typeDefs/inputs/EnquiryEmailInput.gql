@@ -1,0 +1,9 @@
+input EnquiryEmailInput {
+  name: UserName!
+  email: Email!
+  company: SafeString 
+  enquiries: [EmailEnquiry!]!
+  regions: [RegionName!]
+  message: SafeString!
+  consent: Boolean!
+}

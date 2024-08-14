@@ -1,0 +1,6 @@
+enum EmissionAllocationDirection {
+  "Emissions allocated to the company by its suppliers"
+  EMISSION_ALLOCATED_BY_SUPPLIERS
+  "Emissions allocated to the company customers"
+  EMISSION_ALLOCATED_TO_CUSTOMERS
+}

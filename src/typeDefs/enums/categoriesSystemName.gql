@@ -1,0 +1,32 @@
+enum CategoriesSystemName {
+  "Purchased goods and services"
+  PURCHASED_GOODS_AND_SERVICES
+  "Capital goods"
+  CAPITAL_GOODS
+  "Fuel and energy related activities"
+  FUEL_AND_ENERGY_RELATED_ACTIVITIES
+  "Upstream transportation and distribution"
+  UPSTREAM_TRANSPORTATION_AND_DISTRIBUTION
+  "Waste generated in operations"
+  WASTE_GENERATED_IN_OPERATIONS
+  "Business travel"
+  BUSINESS_TRAVEL
+  "Employee commuting"
+  EMPLOYEE_COMMUTING
+  "Upstream leased assets"
+  UPSTREAM_LEASED_ASSETS
+  "Downstream transportation and distribution"
+  DOWNSTREAM_TRANSPORTATION_AND_DISTRIBUTION
+  "Processing of sold products"
+  PROCESSING_OF_SOLD_PRODUCTS
+  "Use of sold products"
+  USE_OF_SOLD_PRODUCTS
+  "End of life treatment of sold products"
+  END_OF_LIFE_TREATMENT_OF_SOLD_PRODUCTS
+  "Downstream leased assets"
+  DOWNSTREAM_LEASED_ASSETS
+  "Franchises"
+  FRANCHISES
+  "Investments"
+  INVESTMENTS
+}

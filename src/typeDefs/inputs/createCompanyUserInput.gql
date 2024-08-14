@@ -1,0 +1,9 @@
+input CreateCompanyUserInput {
+  email: Email!
+  firstName: UserName!
+  lastName: UserName!
+  expertiseDomain: ExpertiseDomain
+  authProvider: AuthProvider!
+  roleName: RoleName!
+  companyId: UUID!
+}

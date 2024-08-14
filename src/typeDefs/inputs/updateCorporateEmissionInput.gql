@@ -1,0 +1,15 @@
+input UpdateCorporateEmissionInput {
+  id: UUID!
+  type: CorporateEmissionType!
+  year: Int!
+  scope1: Float!
+  scope2: Float!
+  scope3: Float
+  scope2Type: Scope2Type!
+  offset: Float
+  examplePercentage: Float
+  headCount: Int
+  carbonIntensities: [CreateCarbonIntensityData!]
+  verificationFileId: UUID
+  corporateEmissionAccess: CorporateEmissionAccessInput!
+}

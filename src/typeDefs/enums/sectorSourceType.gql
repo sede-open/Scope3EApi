@@ -1,0 +1,4 @@
+enum SectorSourceType {
+  "Industry/sector has been retrieved from Dun and Bradstreet API"
+  DNB
+}

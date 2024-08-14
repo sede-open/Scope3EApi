@@ -1,0 +1,12 @@
+enum ExpertiseDomain {
+  "Sustainability"
+  SUSTAINABILITY
+  "Procurement"
+  PROCUREMENT
+  "Business Development"
+  BUSINESS_DEVELOPMENT
+  "Finance"
+  FINANCE
+  "Other"
+  OTHER
+}

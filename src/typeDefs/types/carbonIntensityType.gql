@@ -1,0 +1,6 @@
+enum CarbonIntensityType {
+  "Submitted by user"
+  USER_SUBMITTED
+  "Intensity has been calculated, rather than submitted by user"
+  ESTIMATED
+}

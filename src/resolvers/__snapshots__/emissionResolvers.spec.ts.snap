@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`emissionResolvers - corporateCarbonIntensityComparisons when user belongs to a company with ACTIVE status should return corporate emission intensities for a SUPPLIER_EDITOR of a company 1`] = `
+[
+  {
+    "companyIntensity": {
+      "scope1": null,
+      "scope2": null,
+      "scope3": null,
+    },
+    "sectorIntensity": {
+      "scope1": 2,
+      "scope2": 4,
+      "scope3": 6,
+    },
+    "year": 2016,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "year": 2017,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 1.8333333333333333,
+      "scope2": 3.6666666666666665,
+      "scope3": 5.5,
+    },
+    "year": 2018,
+  },
+]
+`;
+
+exports[`emissionResolvers - corporateCarbonIntensityComparisons when user belongs to a company with ACTIVE status should return corporate emission intensities for a SUPPLIER_VIEWER of a company 1`] = `
+[
+  {
+    "companyIntensity": {
+      "scope1": null,
+      "scope2": null,
+      "scope3": null,
+    },
+    "sectorIntensity": {
+      "scope1": 2,
+      "scope2": 4,
+      "scope3": 6,
+    },
+    "year": 2016,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "year": 2017,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 1.8333333333333333,
+      "scope2": 3.6666666666666665,
+      "scope3": 5.5,
+    },
+    "year": 2018,
+  },
+]
+`;
+
+exports[`emissionResolvers - corporateCarbonIntensityComparisons when user belongs to a company with PENDING_USER_ACTIVATION status should return corporate emission intensities for a SUPPLIER_EDITOR of a company 1`] = `
+[
+  {
+    "companyIntensity": {
+      "scope1": null,
+      "scope2": null,
+      "scope3": null,
+    },
+    "sectorIntensity": {
+      "scope1": 2,
+      "scope2": 4,
+      "scope3": 6,
+    },
+    "year": 2016,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "year": 2017,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 1.8333333333333333,
+      "scope2": 3.6666666666666665,
+      "scope3": 5.5,
+    },
+    "year": 2018,
+  },
+]
+`;
+
+exports[`emissionResolvers - corporateCarbonIntensityComparisons when user belongs to a company with PENDING_USER_ACTIVATION status should return corporate emission intensities for a SUPPLIER_VIEWER of a company 1`] = `
+[
+  {
+    "companyIntensity": {
+      "scope1": null,
+      "scope2": null,
+      "scope3": null,
+    },
+    "sectorIntensity": {
+      "scope1": 2,
+      "scope2": 4,
+      "scope3": 6,
+    },
+    "year": 2016,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "year": 2017,
+  },
+  {
+    "companyIntensity": {
+      "scope1": 0.5,
+      "scope2": 1,
+      "scope3": 1.5,
+    },
+    "sectorIntensity": {
+      "scope1": 1.8333333333333333,
+      "scope2": 3.6666666666666665,
+      "scope3": 5.5,
+    },
+    "year": 2018,
+  },
+]
+`;

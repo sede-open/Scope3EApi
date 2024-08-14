@@ -1,0 +1,41 @@
+app: 
+environment: 
+host: 
+port: 
+portName: 
+replicaCount: 
+appUser: 
+ingressName: 
+secretName: 
+
+cpuLimit: 
+memoryLimit: 
+cpuRequest: 
+memoryRequest: 
+
+tls:
+  enabled: 
+ingress:
+  className: 
+  annotations:
+    cert-manager.io/cluster-issuer: 
+    nginx.ingress.kubernetes.io/rewrite-target: 
+    nginx.ingress.kubernetes.io/proxy-body-size: 
+
+# needed env variables
+AKAMAI_JWKS_URL: 
+AKAMAI_REGISTRATION_API: 
+AKAMAI_REGISTRATION_REDIRECT: 
+SENTRY_DSN: 
+MULESOFT_API_URL: 
+XYZ_EMAIL_ADDRESS: 
+WEB_APP_BASE_URL: 
+REDIS_PORT: 
+DNB_AUTH_URL: 
+DNB_TYPEAHEAD_URL: 
+DNB_BY_DUNS_URL: 
+LOG_LEVEL: 
+JWT_ISSUER: 
+AKAMAI_BASE_URL: 
+AUTH_TOKEN_API: 
+XYZ_ALERTS_SLACK_CHANNEL_ID: 

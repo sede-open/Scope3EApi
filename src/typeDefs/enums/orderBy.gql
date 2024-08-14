@@ -1,0 +1,6 @@
+enum OrderBy {
+  "Order results ascending"
+  ASC
+  "Order results descending"
+  DESC
+}

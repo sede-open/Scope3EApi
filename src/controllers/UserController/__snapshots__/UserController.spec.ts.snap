@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserController deleteUser() when user is ADMIN should remove personal user details and hash email 1`] = `
+{
+  "action": "USER_DELETED",
+  "currentPayload": "{"id":"d483271b-d5ad-490c-b5c4-d5d66b3205bd"}",
+  "previousPayload": "{"id":"d483271b-d5ad-490c-b5c4-d5d66b3205bd"}",
+  "userId": "currentUserId",
+}
+`;
+
+exports[`UserController deleteUser() when user is SUPPLIER_EDITOR should remove personal user details and hash email 1`] = `
+{
+  "action": "USER_DELETED",
+  "currentPayload": "{"id":"d483271b-d5ad-490c-b5c4-d5d66b3205bd"}",
+  "previousPayload": "{"id":"d483271b-d5ad-490c-b5c4-d5d66b3205bd"}",
+  "userId": "currentUserId",
+}
+`;

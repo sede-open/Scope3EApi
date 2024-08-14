@@ -1,0 +1,11 @@
+input UpdateEmissionAllocationInput {
+  id: UUID!
+  status: EmissionAllocationStatus
+  emissions: Float
+  allocationMethod: EmissionAllocationMethod
+  supplierEmissionId: UUID
+  customerEmissionId: UUID
+  categoryId: UUID
+  addedToCustomerScopeTotal: Boolean
+  note: SafeString
+}

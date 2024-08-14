@@ -1,0 +1,5 @@
+type DataShareRequest {
+  id: UUID!
+  companyId: UUID!
+  targetCompanyId: UUID!
+}

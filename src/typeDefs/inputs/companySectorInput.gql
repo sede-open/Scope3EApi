@@ -1,0 +1,4 @@
+input CompanySectorInput {
+  id: UUID!
+  sectorType: CompanySectorType!
+}

@@ -1,0 +1,84 @@
+enum EmailEnquiry {
+  "Low carbon solution for public contact form"
+  LOW_CARBON_SOLUTION
+  "Joining enquiry for public contact form"
+  JOIN
+  "Demo request"
+  DEMO
+  "General query for public and authenticated contact form"
+  GENERAL_ENQUIRY
+  "Compensate the CO2 emissions of your fleet for authenticated contact form"
+  CO2_FLEET_EMISSION_COMPENSATION
+  "Charging your electric vehicle solution for authenticated contact form"
+  EMOBILITY
+  "Hydrogen for Industry and Transport vehicle solution for authenticated contact form"
+  HYDROGEN
+  "Liquified Natural Gas for Transport solution for authenticated contact form"
+  LNG
+  "Lubricant Solutions solution for authenticated contact form"
+  LUBRICANT_SOLUTIONS
+  "Investing in Natural Ecosystems for authenticated contact form"
+  NATURE_BASED
+  "Sustainable Aviation Fuel for authenticated contact form"
+  SUSTAINABLE_AVIATION
+  "Telematics to reduce fuel consumption for authenticated contact form"
+  TELEMATICS
+  "JAWS low-cost software for all vessels for authenticated contact form"
+  VESSELS_SOFTWARE
+  "MachineMax for all vessels for authenticated contact form"
+  MACHINE_MAX
+  "Decarbonise your road freight for all vessels for authenticated contact form"
+  INSTA_FREIGHT
+  "Immersion cooling redefined for all vessels for authenticated contact form"
+  IMMERSION_COOLING
+  "CO2 Capture Technology for all vessels for authenticated contact form"
+  CO2_CAPTURE_TECHNOLOGY
+  "Sustainable Bitumen for all vessels for authenticated contact form"
+  SUSTAINABLE_BITUMEN
+  "Reducing CO2 intensity with Example Chemicals for all vessels for authenticated contact form"
+  REDUCING_CO2_INTENSITY_WITH_ABCD_CHEMICALS
+  "Corrosion-free pipelines for offshore"
+  CORROSION_FREE_PIPELINES
+  "ADIP Ultra for CO2 removal for authenticated contact form"
+  ADIP_ULTRA
+  "Blue Hydrogen for heavy industries for authenticated contact form"
+  BLUE_HYDROGEN
+  "Decarbonise your fleet while fuelling (Example TapUp) for authenticated contact form"
+  DECARBONISE_YOUR_FLEET
+  "Onsite solar for authenticated contact form"
+  ONSITE_SOLAR
+  "Battery storage for authenticated contact form"
+  BATTERY_STORAGE
+  "Energy management for authenticated contact form"
+  ENERGY_MANAGEMENT
+  "Corporate Power Purchase Agreements for authenticated contact form"
+  CORPORATE_POWER_PURCHASE_AGREEMENTS
+  "Cansolv for authenticated contact form"
+  CANSOLV
+  "Leveraging Distributed Energy"
+  LEVERAGING_DISTRIBUTED_ENERGY
+  "LO3 Energy Consumption Tracking"
+  LO3_ENERGY_CONSUMPTION_TRACKING
+  "Innowatts Carbon & Energy Analytics"
+  INNOWATTS_CARBON_ENERGY_ANALYTICS
+  "Renewable Energy Certificates"
+  RENEWABLE_ENERGY_CERTIFICATES
+  "Renewable Power"
+  RENEWABLE_POWER
+  "Sustainable Land Asset Enhancement"
+  SUSTAINABLE_LAND_ASSET_ENHANCEMENT
+  "Smarter, Greener Fuel Management with i6"
+  I6_FUEL_MANAGEMENT
+  "Decarbonisation with Renewable Natural Gas"
+  RENEWABLE_NATURAL_GAS
+  "Onsite Renewable Power Generation"
+  ONSITE_RENEWABLE_POWER_GENERATION
+  "Maximise industrial efficiency with AI (Detect Technology)"
+  DETECT_TECHNOLOGY_INDUSTRIAL_EFFICIENCY
+  "Sustainable long-haul transport with Bio LNG fuel"
+  LONG_HAUL_BIO_LNG
+  "Solar Solutions with Expert Advice"
+  SOLAR_SOLUTION
+  "Make Savings with Simulation Technology"
+  SIMULATION_TECHNOLOGY
+}

@@ -1,0 +1,9 @@
+type File {
+  id: UUID!
+  originalFilename: String!
+  azureBlobFilename: String!
+  mimetype: String!
+  sizeInBytes: Float!
+  company: Company!
+  createdByUser: User!
+}

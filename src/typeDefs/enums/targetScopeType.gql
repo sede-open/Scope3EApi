@@ -1,0 +1,6 @@
+enum TargetScopeType {
+  "Ambition that includes scope 1 and 2 only"
+  SCOPE_1_2
+  "Ambition that includes scope 3 only"
+  SCOPE_3
+}

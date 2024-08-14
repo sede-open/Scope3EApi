@@ -1,0 +1,4 @@
+input UpdateCompanySectorsInput {
+  companyId: UUID!
+  sectors: [CompanySectorInput!]!
+}

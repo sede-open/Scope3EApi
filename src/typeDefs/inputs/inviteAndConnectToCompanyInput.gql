@@ -1,0 +1,8 @@
+input InviteAndConnectToCompanyInput {
+  companyDuns: SafeString!
+  firstName: UserName!
+  lastName: UserName!
+  email: Email!
+  inviteType: CompanyRelationshipType!
+  note: SafeString
+}

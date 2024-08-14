@@ -1,0 +1,16 @@
+type CorporateEmissionRank {
+  id: UUID!
+  rank: Int!
+  currentYear: Int!
+  scope1: Int!
+  scope2: Int!
+  scope3: Int
+  businessSector: String
+  subSector: String
+  primarySector: String
+  secondarySector: String
+  reductionPercentage: Float!
+  rankType: ReductionRankType!
+  hasVerificationFile: Boolean!
+  hasPreviousYearVerificationFile: Boolean!
+}

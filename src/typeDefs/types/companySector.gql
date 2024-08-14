@@ -1,0 +1,11 @@
+type CompanySector {
+  id: UUID!
+  company: Company!
+  sector: Sector!
+  sectorType: CompanySectorType!
+  createdByUser: User
+  updatedByUser: User
+  hasBeenUpdated: Boolean
+  createdAt: Date
+  updatedAt: Date
+}

@@ -1,0 +1,14 @@
+enum CompanyStatus {
+  "Invited company pending user confirmation. A user has not agreed to join XYZ"
+  PENDING_USER_CONFIRMATION
+  "User has accepted to join XYZ. Support team are vetting the company"
+  VETTING_IN_PROGRESS
+  "Company user has declined to join XYZ"
+  INVITATION_DECLINED
+  "Support team have vetoed the company"
+  VETOED
+  "Support team has approved the company. Awaiting user login"
+  PENDING_USER_ACTIVATION
+  "Active company - a user has logged in at least once"
+  ACTIVE
+}

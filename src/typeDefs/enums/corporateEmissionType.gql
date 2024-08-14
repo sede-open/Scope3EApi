@@ -1,0 +1,6 @@
+enum CorporateEmissionType {
+  "Baseline emission submission"
+  BASELINE
+  "Actual emission levels"
+  ACTUAL
+}

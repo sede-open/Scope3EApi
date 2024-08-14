@@ -1,0 +1,7 @@
+type CorporateEmissionAccess {
+  scope1And2: Boolean
+  scope3: Boolean
+  carbonOffsets: Boolean
+  carbonIntensity: Boolean
+  publicLink: SafeString
+}

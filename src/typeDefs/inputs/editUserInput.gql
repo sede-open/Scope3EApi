@@ -1,0 +1,7 @@
+input EditUserInput {
+  email: Email!
+  firstName: UserName
+  lastName: UserName
+  roleName: RoleName!
+  companyId: UUID
+}

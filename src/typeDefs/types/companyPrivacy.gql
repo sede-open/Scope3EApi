@@ -1,0 +1,7 @@
+type CompanyPrivacy {
+  id: UUID!
+  companyId: UUID!
+  allPlatform: Boolean!
+  customerNetwork: Boolean!
+  supplierNetwork: Boolean!
+}

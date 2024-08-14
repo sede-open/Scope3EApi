@@ -1,0 +1,9 @@
+input CreateUserInput {
+  email: Email!
+  firstName: UserName!
+  lastName: UserName!
+  authProvider: AuthProvider!
+  roleName: RoleName!
+  companyId: UUID!
+  expertiseDomain: ExpertiseDomain
+}

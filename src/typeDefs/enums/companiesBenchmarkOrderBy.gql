@@ -1,0 +1,16 @@
+enum CompaniesBenchmarkOrderBy {
+  "by the company name"
+  COMPANY_NAME
+  "by the size of the company"
+  ESTIMATED_NUMBER_OF_EMPLOYEES
+  "by the baseline emission year"
+  BASELINE_YEAR
+  "by the total emission variance"
+  TOTAL_EMISSION_VARIANCE
+  "by the annual emission variance"
+  ANNUAL_EMISSION_VARIANCE
+  "by the selected carbon intensity"
+  CARBON_INTENSITY_RATIO
+  "by the network connection type"
+  COMPANY_RELATIONSHIP
+}

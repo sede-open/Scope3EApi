@@ -1,0 +1,21 @@
+overwrite: true
+schema: src/typeDefs/**/*.gql
+generates:
+  schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true
+  src/types.ts:
+    config:
+      scalars:
+        Date: Date
+        SafeString: string
+        Email: string
+        UserName: string
+        PageSize: number
+        UUID: string
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
